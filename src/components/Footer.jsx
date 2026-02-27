@@ -32,7 +32,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                @SoapGlowBeautyBar
+                @TheGlow_UpBeautyBar
               </a>
             </p>
             <p className="mt-3 text-xs text-neutral-500">

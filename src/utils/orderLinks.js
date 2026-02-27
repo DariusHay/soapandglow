@@ -7,4 +7,4 @@ export function buildOrderEmail(productName) {
   return `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
-export const instagramUrl = "https://instagram.com/SoapGlowBeautyBar";
+export const instagramUrl = "https://instagram.com/theglow_upbeautybar";

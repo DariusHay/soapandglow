@@ -6,6 +6,8 @@ import EmailSignup from "../components/EmailSignup";
 import { products } from "../data/products";
 import { instagramUrl } from "../utils/orderLinks";
 import { offers } from "../data/offers";
+import flyerImg from "../assets/soapglow.jpg";
+import heroImg from "../assets/hero.jpg";
 
 function OfferCard({ name, details, price, compareAt, savings, note, featured }) {
   return (
@@ -79,7 +81,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-6">
           <div className="rounded-3xl border border-neutral-200 shadow-soft overflow-hidden bg-white">
             <img
-              src="/images/soapglow.jpg"
+              src={flyerImg}
               alt="Soap Glow & Beauty Bar flyer"
               className="w-full h-auto object-cover"
               loading="eager"
@@ -92,7 +94,7 @@ export default function Home() {
       <section className="relative overflow-hidden mt-10">
         {/* background image */}
         <img
-          src="/images/hero.jpg"
+          src={heroImg}
           alt="Handcrafted soaps on a table with lavender"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -212,12 +214,15 @@ export default function Home() {
                 <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-4 py-2 text-xs font-semibold">
                   Code: FIRSTGLOW
                 </span>
-                <a
-                  href="#signup"
+                <button
+                  type="button"
+                  onClick={() => {
+                    document.getElementById("signup")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
                   className="text-sm underline underline-offset-4 text-neutral-700 hover:text-brand-ink"
                 >
                   Get the code
-                </a>
+                </button>
               </div>
             </div>
           </div>
