@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SEO from "../components/SEO";
 import { products } from "../data/products";
 import { formatPrice } from "../utils/formatPrice";
@@ -136,10 +136,10 @@ export default function ProductDetail() {
             <div className="mt-8 border-t border-neutral-200 pt-6 text-sm text-neutral-700">
               <p className="font-semibold text-brand-ink">Need details?</p>
               <div className="mt-2 flex flex-wrap gap-3">
-                <a className="underline underline-offset-4" href="/policies/shipping">Shipping</a>
-                <a className="underline underline-offset-4" href="/policies/refunds">Refunds & Returns</a>
-                <a className="underline underline-offset-4" href="/policies/terms">Terms</a>
-                <a className="underline underline-offset-4" href="/policies/privacy">Privacy</a>
+                <Link className="underline underline-offset-4" to="/policies/shipping">Shipping</Link>
+                <Link className="underline underline-offset-4" to="/policies/refunds">Refunds & Returns</Link>
+                <Link className="underline underline-offset-4" to="/policies/terms">Terms</Link>
+                <Link className="underline underline-offset-4" to="/policies/privacy">Privacy</Link>
               </div>
             </div>
           </div>

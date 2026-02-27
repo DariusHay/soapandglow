@@ -63,6 +63,24 @@ function OfferCard({ name, details, price, compareAt, savings, note, featured })
   );
 }
 
+function OfferLine({ label, price, compareAt, savings }) {
+  return (
+    <div className="flex items-start justify-between gap-4 py-3 border-b border-white/25 last:border-b-0">
+      <div>
+        <p className="text-sm font-semibold text-white">{label}</p>
+        {compareAt ? (
+          <p className="text-xs text-white/75">
+            Was <span className="line-through">${compareAt}</span>
+            {savings ? <span className="ml-2 text-brand-lime font-semibold">Save ${savings}</span> : null}
+          </p>
+        ) : null}
+      </div>
+
+      <p className="text-sm font-semibold text-white">${price}</p>
+    </div>
+  );
+}
+
 export default function Home() {
   const featured = products.filter((p) => p.featured).slice(0, 6);
 
@@ -190,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* BUNDLES / GIFT SETS / SUBSCRIPTION (Option A: Boutique tiles) */}
-      <section className="px-4 sm:px-6 lg:px-10 py-16 bg-neutral-50">
+      {/* <section className="px-4 sm:px-6 lg:px-10 py-16 bg-neutral-50">
         <div className="max-w-6xl mx-auto">
           <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
             <div>
@@ -204,7 +222,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* New customer callout */}
+            
             <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-soft">
               <p className="text-xs tracking-luxe uppercase text-brand-sage">New Customer</p>
               <p className="mt-2 text-sm text-neutral-700">
@@ -228,7 +246,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10 grid gap-10 lg:grid-cols-3">
-            {/* Bundle Deals */}
+            
             <div className="grid gap-4">
               <p className="text-xs tracking-luxe uppercase text-brand-sage">
                 Bundle Deals (Best Value)
@@ -242,7 +260,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Gift Sets */}
+            
             <div className="grid gap-4">
               <p className="text-xs tracking-luxe uppercase text-brand-sage">
                 Gift Sets
@@ -251,7 +269,7 @@ export default function Home() {
                 <OfferCard key={o.name} {...o} />
               ))}
 
-              {/* little helper card */}
+              
               <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-soft">
                 <p className="text-sm font-semibold text-brand-ink">Gifting made easy</p>
                 <p className="mt-2 text-sm text-neutral-700">
@@ -261,7 +279,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Subscription */}
+            
             <div className="grid gap-4">
               <p className="text-xs tracking-luxe uppercase text-brand-sage">
                 Subscription (Save the Most)
@@ -294,6 +312,147 @@ export default function Home() {
                     DM to Join
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+
+      {/* OFFERS (informational, no cards) */}
+      <section className="px-4 sm:px-6 lg:px-10 py-16 bg-gradient-to-b from-brand-stone via-brand-stone to-white">
+        <div className="max-w-6xl mx-auto">
+          {/* Header + CTA */}
+          <div className="rounded-3xl overflow-hidden border border-neutral-200 shadow-soft">
+            <div className="relative bg-brand-ink">
+              {/* subtle glow accents */}
+              <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-brand-lime/20 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-brand-sage/25 blur-3xl" />
+
+              <div className="relative p-6 sm:p-8">
+                <p className="text-xs tracking-luxe uppercase text-white/75">
+                  Deals & Subscriptions
+                </p>
+                <h2 className="font-display text-4xl sm:text-5xl text-white mt-2">
+                  Save more with bundles, gift sets, and monthly plans
+                </h2>
+                <p className="mt-3 text-white/85 max-w-3xl">
+                  Shop-only for now—click the button to email us what you want and we’ll confirm totals,
+                  shipping, and next steps.
+                </p>
+
+                <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                  <div className="text-sm text-white/85">
+                    ✨ New customer: <b className="text-white">15% OFF + FREE SHIPPING</b> on $35+ with code{" "}
+                    <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
+                      FIRSTGLOW
+                    </span>
+                  </div>
+
+                  <a
+                    href="mailto:Ladyjo3000@gmail.com?subject=Offer%20Request%20-%20Bundles%2FGifts%2FSubscription&body=Hi%20Soap%20Glow%20%26%20Beauty%20Bar%2C%0A%0AI%27d%20like%20to%20take%20advantage%20of%20an%20offer.%20Here%27s%20what%20I%20want%3A%0A%0AOffer%20type%20(Bundle%2FGift%20Set%2FSubscription)%3A%0ASelection(s)%3A%0AQuantity%3A%0AName%3A%0APhone%3A%0AShipping%20Address%3A%0A%0AThank%20you!%0A"
+                    className="px-6 py-3 rounded-full bg-brand-lime text-brand-ink font-semibold hover:opacity-90 transition text-center"
+                  >
+                    Email to Claim an Offer
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Offer lists */}
+            <div className="bg-white">
+              <div className="grid lg:grid-cols-3">
+                {/* Bundles */}
+                <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-neutral-200">
+                  <p className="text-xs tracking-luxe uppercase text-brand-sage">Bundle Deals</p>
+                  <h3 className="font-display text-2xl text-brand-ink mt-2">Best value bundles</h3>
+                  <p className="mt-2 text-sm text-neutral-700">
+                    Mix and match bars for the best per-bar pricing.
+                  </p>
+
+                  <div className="mt-5 rounded-2xl bg-brand-ink p-5">
+                    <OfferLine label="Try 3 Bundle — any 3 bars" price="24" compareAt="27" savings="3" />
+                    <OfferLine label="Glow Collection — any 5 bars" price="40" compareAt="45" savings="5" />
+                    <OfferLine label="Stock Up — any 10 bars" price="75" compareAt="90" savings="15" />
+                  </div>
+
+                  <p className="mt-4 text-xs text-neutral-600">
+                    Tip: If you’re new, the <b>Glow Collection</b> is the easiest way to try favorites.
+                  </p>
+                </div>
+
+                {/* Gift Sets */}
+                <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-neutral-200">
+                  <p className="text-xs tracking-luxe uppercase text-brand-sage">Gift Sets</p>
+                  <h3 className="font-display text-2xl text-brand-ink mt-2">Ready-to-gift</h3>
+                  <p className="mt-2 text-sm text-neutral-700">
+                    Beautiful packaging + premium selection—perfect for any occasion.
+                  </p>
+
+                  <div className="mt-5 rounded-2xl bg-neutral-50 border border-neutral-200 p-5">
+                    <div className="flex items-start justify-between gap-4 py-3 border-b border-neutral-200">
+                      <div>
+                        <p className="text-sm font-semibold text-brand-ink">Glow Gift Box</p>
+                        <p className="text-xs text-neutral-600">3 bars + gift packaging</p>
+                      </div>
+                      <p className="text-sm font-semibold text-brand-ink">$30</p>
+                    </div>
+
+                    <div className="flex items-start justify-between gap-4 py-3 border-b border-neutral-200">
+                      <div>
+                        <p className="text-sm font-semibold text-brand-ink">Self-Care Set</p>
+                        <p className="text-xs text-neutral-600">5 bars + gift box</p>
+                      </div>
+                      <p className="text-sm font-semibold text-brand-ink">$45</p>
+                    </div>
+
+                    <div className="flex items-start justify-between gap-4 py-3">
+                      <div>
+                        <p className="text-sm font-semibold text-brand-ink">Ultimate Spa Collection</p>
+                        <p className="text-xs text-neutral-600">8 bars + premium gift box</p>
+                      </div>
+                      <p className="text-sm font-semibold text-brand-ink">$70</p>
+                    </div>
+                  </div>
+
+                  <p className="mt-4 text-xs text-neutral-600">
+                    Want it customized? Email your scent preferences and we’ll help you choose.
+                  </p>
+                </div>
+
+                {/* Subscription */}
+                <div className="p-6 sm:p-8">
+                  <p className="text-xs tracking-luxe uppercase text-brand-sage">Subscription</p>
+                  <h3 className="font-display text-2xl text-brand-ink mt-2">Monthly Soap Club</h3>
+                  <p className="mt-2 text-sm text-neutral-700">
+                    Save the most with monthly deliveries—free shipping always.
+                  </p>
+
+                  <div className="mt-5 rounded-2xl bg-brand-ink p-5">
+                    <OfferLine label="1 bar/month" price="7.50" note="per bar" />
+                    <OfferLine label="2 bars/month" price="14" note="($7/bar)" />
+                    <OfferLine label="4 bars/month" price="27" note="($6.75/bar)" />
+                  </div>
+
+                  <ul className="mt-4 text-sm text-neutral-700 space-y-2">
+                    <li>✅ Free shipping always</li>
+                    <li>✅ Cancel anytime</li>
+                    <li>✅ Customize scents each month</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Bottom CTA */}
+              <div className="px-6 sm:px-8 py-6 border-t border-neutral-200 bg-white flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                <p className="text-sm text-neutral-700">
+                  Ready to claim a deal? Email us what you want and we’ll confirm everything within 48 hours.
+                </p>
+
+                <a
+                  href="mailto:Ladyjo3000@gmail.com?subject=Offer%20Request%20-%20Bundles%2FGifts%2FSubscription&body=Hi%20Soap%20Glow%20%26%20Beauty%20Bar%2C%0A%0AI%27d%20like%20to%20take%20advantage%20of%20an%20offer.%20Here%27s%20what%20I%20want%3A%0A%0AOffer%20type%20(Bundle%2FGift%20Set%2FSubscription)%3A%0ASelection(s)%3A%0AQuantity%3A%0AName%3A%0APhone%3A%0AShipping%20Address%3A%0A%0AThank%20you!%0A"
+                  className="px-6 py-3 rounded-full bg-brand-lime text-brand-ink font-semibold hover:opacity-90 transition text-center"
+                >
+                  Email to Claim an Offer
+                </a>
               </div>
             </div>
           </div>
