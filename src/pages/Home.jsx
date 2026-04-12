@@ -167,7 +167,7 @@ export default function Home() {
           <div className="mt-10 rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md p-5 sm:p-6 shadow-soft">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
               <p className="text-white/90">
-                💰 Single Bars <b className="text-white">Starting at $8</b>
+                💰 Single Bars <b className="text-white">Starting at $10</b>
               </p>
               <p className="text-white/90">
                 🎁 Bundles: <b className="text-white">Save up to $15</b>
