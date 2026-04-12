@@ -2,7 +2,7 @@ import PolicyLayout from "./PolicyLayout";
 
 export default function ShippingPolicy() {
   return (
-    <PolicyLayout title="Shipping Policy" effectiveDate="[Insert Date]">
+    <PolicyLayout title="Shipping Policy" effectiveDate="01/01/2026">
       <h3>Processing time</h3>
       <p>All soaps are handcrafted to order. Please allow:</p>
       <ul>

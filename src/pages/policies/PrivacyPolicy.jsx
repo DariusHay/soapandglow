@@ -2,7 +2,7 @@ import PolicyLayout from "./PolicyLayout";
 
 export default function PrivacyPolicy() {
   return (
-    <PolicyLayout title="Privacy Policy" effectiveDate="[Insert Date]">
+    <PolicyLayout title="Privacy Policy" effectiveDate="01/01/2026">
       <p>
         Your privacy matters to us. This policy explains how Soap Glow & Beauty Bar collects, uses,
         and protects your personal information.

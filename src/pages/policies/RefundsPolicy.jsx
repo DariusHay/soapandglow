@@ -2,7 +2,7 @@ import PolicyLayout from "./PolicyLayout";
 
 export default function RefundsPolicy() {
   return (
-    <PolicyLayout title="Refund & Return Policy" effectiveDate="[Insert Date]">
+    <PolicyLayout title="Refund & Return Policy" effectiveDate="01/01/2026">
       <p>
         At Soap Glow & Beauty Bar, your satisfaction is our priority. All products are handcrafted
         with organic ingredients and made fresh to order.

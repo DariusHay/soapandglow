@@ -19,9 +19,9 @@ export default function Footer() {
               Email:{" "}
               <a
                 className="underline underline-offset-4 hover:text-brand-ink"
-                href="mailto:Ladyjo3000@gmail.com"
+                href="mailto:soapglowandbeautybar@gmail.com"
               >
-                Ladyjo3000@gmail.com
+                soapglowandbeautybar@gmail.com
               </a>
             </p>
             <p>

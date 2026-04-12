@@ -1,1 +1,5 @@
-export const categories = ["All", "Soaps", "Oils", "Fragrances"];
+export const categories = [
+  "All",
+  "Classic Collection",
+  "Signature Collection",
+];

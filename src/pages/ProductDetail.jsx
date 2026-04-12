@@ -31,6 +31,7 @@ export default function ProductDetail() {
   }
 
   const mainImg = product.images?.[0];
+  const hasImage = Boolean(mainImg);
 
   return (
     <div className="bg-white">
@@ -40,26 +41,29 @@ export default function ProductDetail() {
       />
 
       <section className="px-4 sm:px-6 lg:px-10 pt-10 pb-14">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div className="rounded-3xl overflow-hidden bg-neutral-50 border border-neutral-100">
-            {mainImg ? (
+        <div
+          className={
+            hasImage
+              ? "max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10"
+              : "max-w-3xl mx-auto"
+          }
+        >
+          {hasImage && (
+            <div className="rounded-3xl overflow-hidden bg-neutral-50 border border-neutral-100">
               <img
                 src={mainImg}
                 alt={product.name}
                 className="w-full h-full object-cover"
                 loading="eager"
               />
-            ) : (
-              <div className="aspect-square w-full grid place-items-center text-sm text-neutral-500">
-                Add product image
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div>
+          <div className={hasImage ? "" : "rounded-3xl bg-gradient-to-br from-brand-stone/40 via-white to-brand-stone/20 p-6 sm:p-8 border border-neutral-200"}>
             <p className="text-xs tracking-luxe uppercase text-brand-sage">
               {product.category}
             </p>
+
             <h1 className="font-display text-4xl sm:text-5xl text-brand-ink mt-2">
               {product.name}
             </h1>
@@ -67,10 +71,9 @@ export default function ProductDetail() {
             <div className="mt-4 flex items-center justify-between gap-4">
               <p className="text-xl text-brand-ink font-semibold">
                 {formatPrice(product.price, product.currency)}
-                {product.size ? (
-                  <span className="text-sm font-normal text-neutral-600"> • {product.size}</span>
-                ) : null}
+                <span className="text-sm font-normal text-neutral-600"> • 5 oz</span>
               </p>
+
               <div className="flex gap-2 flex-wrap justify-end">
                 <InfoPill>Shop-only</InfoPill>
                 <InfoPill>FIRSTGLOW</InfoPill>
@@ -81,12 +84,12 @@ export default function ProductDetail() {
               {product.description}
             </p>
 
-            <div className="mt-6 rounded-2xl border border-neutral-200 p-5">
+            <div className="mt-6 rounded-2xl border border-neutral-200 p-5 bg-white/80">
               <p className="text-sm font-semibold text-brand-ink">
                 Highlights
               </p>
               <ul className="mt-3 space-y-2 text-sm text-neutral-700">
-                {(product.tags || []).slice(0, 4).map((t) => (
+                {(product.benefits || []).slice(0, 4).map((t) => (
                   <li key={t} className="flex gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-brand-lime" />
                     <span className="capitalize">{t.replaceAll("-", " ")}</span>
@@ -95,7 +98,6 @@ export default function ProductDetail() {
               </ul>
             </div>
 
-            {/* SHOP-ONLY CTAs */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <a
                 href={buildOrderEmail(product.name)}
@@ -119,27 +121,37 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            {/* SHIPPING + OFFER */}
             <div className="mt-8 rounded-3xl border border-neutral-200 p-6 bg-neutral-50">
-              <p className="text-sm font-semibold text-brand-ink">Shipping & offers</p>
+              <p className="text-sm font-semibold text-brand-ink">
+                Shipping & offers
+              </p>
               <ul className="mt-3 text-sm text-neutral-700 space-y-2">
                 <li>📦 Orders under $50: <b>$6</b> flat-rate shipping</li>
                 <li>🎉 Orders $50+: <b>FREE SHIPPING</b></li>
-                <li>✨ New customer: <b>15% OFF + FREE SHIPPING</b> on orders $35+ with code <b>FIRSTGLOW</b></li>
+                <li>
+                  ✨ New customer: <b>15% OFF + FREE SHIPPING</b> on orders $35+ with code <b>FIRSTGLOW</b>
+                </li>
               </ul>
               <p className="mt-4 text-xs text-neutral-500">
                 Allergy note: Always review ingredients. Discontinue use if irritation occurs.
               </p>
             </div>
 
-            {/* POLICY LINKS */}
             <div className="mt-8 border-t border-neutral-200 pt-6 text-sm text-neutral-700">
               <p className="font-semibold text-brand-ink">Need details?</p>
               <div className="mt-2 flex flex-wrap gap-3">
-                <Link className="underline underline-offset-4" to="/policies/shipping">Shipping</Link>
-                <Link className="underline underline-offset-4" to="/policies/refunds">Refunds & Returns</Link>
-                <Link className="underline underline-offset-4" to="/policies/terms">Terms</Link>
-                <Link className="underline underline-offset-4" to="/policies/privacy">Privacy</Link>
+                <Link className="underline underline-offset-4" to="/policies/shipping">
+                  Shipping
+                </Link>
+                <Link className="underline underline-offset-4" to="/policies/refunds">
+                  Refunds & Returns
+                </Link>
+                <Link className="underline underline-offset-4" to="/policies/terms">
+                  Terms
+                </Link>
+                <Link className="underline underline-offset-4" to="/policies/privacy">
+                  Privacy
+                </Link>
               </div>
             </div>
           </div>

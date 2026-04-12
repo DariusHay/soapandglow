@@ -2,7 +2,7 @@ import PolicyLayout from "./PolicyLayout";
 
 export default function TermsPolicy() {
   return (
-    <PolicyLayout title="Terms of Service" effectiveDate="[Insert Date]">
+    <PolicyLayout title="Terms of Service" effectiveDate="01/01/2026">
       <p>
         By using our website and purchasing from Soap Glow & Beauty Bar, you agree to these terms.
       </p>

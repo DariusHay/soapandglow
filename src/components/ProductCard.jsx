@@ -2,42 +2,91 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../utils/formatPrice";
 
 export default function ProductCard({ product }) {
-  const img = product.images?.[0];
+  const hasImage = product.image && product.image.trim() !== "";
+  const isSignature = product.collection === "Signature Collection";
 
   return (
     <Link
       to={`/shop/${product.slug}`}
-      className="group block rounded-2xl overflow-hidden bg-white shadow-soft hover:shadow-xl transition-shadow"
+      className="group block rounded-3xl overflow-hidden bg-white border border-neutral-200 shadow-soft hover:shadow-xl transition"
     >
-      <div className="relative aspect-[4/5] overflow-hidden">
-        {img ? (
+      <div
+        className={`h-3 ${
+          isSignature ? "bg-brand-plum" : "bg-brand-lime"
+        }`}
+      />
+
+      {hasImage ? (
+        <div className="aspect-[4/5] overflow-hidden">
           <img
-            src={img}
+            src={product.image}
             alt={product.name}
             loading="lazy"
-            className="h-full w-full object-cover scale-100 group-hover:scale-[1.04] transition-transform duration-500"
+            className="h-full w-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
           />
-        ) : (
-          <div className="h-full w-full bg-neutral-100" />
-        )}
-
-        <div className="absolute inset-x-0 bottom-0 p-4">
-          <div className="rounded-xl bg-white/80 backdrop-blur px-3 py-2 border border-white/60">
-            <p className="text-xs tracking-luxe uppercase text-neutral-600">
-              {product.category}
+        </div>
+      ) : (
+        <div className="aspect-[4/3] px-6 py-6 bg-gradient-to-br from-brand-stone via-white to-brand-stone/40 flex flex-col justify-between">
+          <div>
+            <p className="text-xs tracking-luxe uppercase text-brand-sage">
+              Handcrafted Soap
             </p>
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="font-display text-xl text-neutral-900 leading-tight">
-                {product.name}
-              </h3>
-              <p className="text-sm font-medium text-neutral-900 whitespace-nowrap">
-                {formatPrice(product.price, product.currency)}
-              </p>
-            </div>
-            <p className="mt-1 text-sm text-neutral-700 line-clamp-2">
-              {product.shortDescription}
-            </p>
+            <h3 className="font-display text-3xl text-brand-ink mt-2 leading-tight">
+              {product.name}
+            </h3>
           </div>
+
+          <div className="flex items-center justify-between gap-3">
+            <span
+              className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                isSignature
+                  ? "bg-brand-plum text-white"
+                  : "bg-brand-lime text-brand-ink"
+              }`}
+            >
+              {product.collection}
+            </span>
+
+            <span className="text-lg font-semibold text-brand-ink">
+              {formatPrice(product.price, "USD")}
+            </span>
+          </div>
+        </div>
+      )}
+
+      <div className="p-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            {/* <p className="text-xs tracking-luxe uppercase text-neutral-500">
+              {product.collection}
+            </p> */}
+            <h3 className="font-display text-2xl text-brand-ink mt-1">
+              {product.name}
+            </h3>
+          </div>
+
+          {/* <p className="text-sm font-semibold text-brand-ink whitespace-nowrap">
+            {formatPrice(product.price, "USD")}
+          </p> */}
+        </div>
+
+        <p className="mt-3 text-sm text-neutral-700">
+          {product.shortDescription}
+        </p>
+
+        <ul className="mt-4 space-y-2 text-sm text-neutral-700">
+          {product.benefits?.slice(0, 3).map((benefit) => (
+            <li key={benefit} className="flex gap-2">
+              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-brand-lime" />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5">
+          <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-4 py-2 text-sm font-semibold">
+            Order Now
+          </span>
         </div>
       </div>
     </Link>

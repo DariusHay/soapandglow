@@ -460,9 +460,9 @@ export default function Home() {
       </section>
 
       {/* EMAIL SIGNUP */}
-      <div id="signup">
+      {/* <div id="signup">
         <EmailSignup />
-      </div>
+      </div> */}
     </div>
   );
 }

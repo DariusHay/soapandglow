@@ -17,8 +17,8 @@ export default function Contact() {
 
           <div className="mt-8 rounded-3xl border border-neutral-200 p-6 bg-neutral-50">
             <p className="text-sm font-semibold text-brand-ink">Email</p>
-            <a className="underline underline-offset-4 text-neutral-700" href="mailto:Ladyjo3000@gmail.com">
-              Ladyjo3000@gmail.com
+            <a className="underline underline-offset-4 text-neutral-700" href="mailto:soapglowandbeautybar@gmail.com">
+              soapglowandbeautybar@gmail.com
             </a>
 
             <p className="text-sm font-semibold text-brand-ink mt-6">Instagram</p>
