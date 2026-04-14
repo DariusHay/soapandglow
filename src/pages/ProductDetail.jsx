@@ -122,14 +122,10 @@ export default function ProductDetail() {
             </div>
 
             <div className="mt-8 rounded-3xl border border-neutral-200 p-6 bg-neutral-50">
-              <p className="text-sm font-semibold text-brand-ink">
-                Shipping & offers
-              </p>
+             
               <ul className="mt-3 text-sm text-neutral-700 space-y-2">
-                <li>📦 Orders under $50: <b>$6</b> flat-rate shipping</li>
-                <li>🎉 Orders $50+: <b>FREE SHIPPING</b></li>
                 <li>
-                  ✨ New customer: <b>15% OFF + FREE SHIPPING</b> on orders $35+ with code <b>FIRSTGLOW</b>
+                  ✨ New customer: <b>10% OFF </b>
                 </li>
               </ul>
               <p className="mt-4 text-xs text-neutral-500">
