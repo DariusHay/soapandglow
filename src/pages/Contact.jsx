@@ -23,7 +23,7 @@ export default function Contact() {
 
             <p className="text-sm font-semibold text-brand-ink mt-6">Instagram</p>
             <a className="underline underline-offset-4 text-neutral-700" href={instagramUrl} target="_blank" rel="noreferrer">
-              @TheGlow_UpBeautyBar
+              @soapglowandbeautybar
             </a>
 
             <p className="text-sm font-semibold text-brand-ink mt-6">Vendor availability</p>

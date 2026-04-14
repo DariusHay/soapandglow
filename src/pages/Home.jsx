@@ -92,7 +92,7 @@ export default function Home() {
       />
 
       {/* Modal (optional) */}
-      <FirstGlowModal />
+      {/* <FirstGlowModal /> */}
 
       {/* 1) FLYER SECTION (TOP, clean, no text above it) */}
       <section className="bg-white">
@@ -169,14 +169,14 @@ export default function Home() {
               <p className="text-white/90">
                 💰 Single Bars <b className="text-white">Starting at $10</b>
               </p>
-              <p className="text-white/90">
+              {/* <p className="text-white/90">
                 🎁 Bundles: <b className="text-white">Save up to $15</b>
-              </p>
-              <p className="text-white/90">
+              </p> */}
+              {/* <p className="text-white/90">
                 📦 Free Shipping for Orders <b className="text-white">$50+</b>
-              </p>
+              </p> */}
               <p className="text-white/90">
-                ✨ New Customers Receive <b className="text-white">15% off + free ship $35+</b>
+                ✨ New Customers Receive <b className="text-white">10% off </b>
                 {/* <span className="ml-2 inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold">
                   FIRSTGLOW
                 </span> */}
@@ -319,12 +319,10 @@ export default function Home() {
       </section> */}
 
       {/* OFFERS (informational, no cards) */}
-      <section className="px-4 sm:px-6 lg:px-10 py-16 bg-gradient-to-b from-brand-stone via-brand-stone to-white">
+      {/* <section className="px-4 sm:px-6 lg:px-10 py-16 bg-gradient-to-b from-brand-stone via-brand-stone to-white">
         <div className="max-w-6xl mx-auto">
-          {/* Header + CTA */}
           <div className="rounded-3xl overflow-hidden border border-neutral-200 shadow-soft">
             <div className="relative bg-brand-ink">
-              {/* subtle glow accents */}
               <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-brand-lime/20 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-brand-sage/25 blur-3xl" />
 
@@ -342,10 +340,11 @@ export default function Home() {
 
                 <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                   <div className="text-sm text-white/85">
-                    ✨ New customer: <b className="text-white">15% OFF + FREE SHIPPING</b> on $35+ with code{" "}
-                    <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
-                      FIRSTGLOW
-                    </span>
+                    ✨ New customer: <b className="text-white">10% OFF with code{" "}
+                      <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
+                        FIRSTGLOW
+                      </span>
+                    </b>
                   </div>
 
                   <a
@@ -358,10 +357,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Offer lists */}
             <div className="bg-white">
               <div className="grid lg:grid-cols-3">
-                {/* Bundles */}
                 <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-neutral-200">
                   <p className="text-xs tracking-luxe uppercase text-brand-sage">Bundle Deals</p>
                   <h3 className="font-display text-2xl text-brand-ink mt-2">Best value bundles</h3>
@@ -380,7 +377,6 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Gift Sets */}
                 <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-neutral-200">
                   <p className="text-xs tracking-luxe uppercase text-brand-sage">Gift Sets</p>
                   <h3 className="font-display text-2xl text-brand-ink mt-2">Ready-to-gift</h3>
@@ -419,12 +415,11 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Subscription */}
                 <div className="p-6 sm:p-8">
                   <p className="text-xs tracking-luxe uppercase text-brand-sage">Subscription</p>
                   <h3 className="font-display text-2xl text-brand-ink mt-2">Monthly Soap Club</h3>
                   <p className="mt-2 text-sm text-neutral-700">
-                    Save the most with monthly deliveries—free shipping always.
+                    Save the most with a monthly subscription.
                   </p>
 
                   <div className="mt-5 rounded-2xl bg-brand-ink p-5">
@@ -434,14 +429,12 @@ export default function Home() {
                   </div>
 
                   <ul className="mt-4 text-sm text-neutral-700 space-y-2">
-                    <li>✅ Free shipping always</li>
                     <li>✅ Cancel anytime</li>
                     <li>✅ Customize scents each month</li>
                   </ul>
                 </div>
               </div>
 
-              {/* Bottom CTA */}
               <div className="px-6 sm:px-8 py-6 border-t border-neutral-200 bg-white flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                 <p className="text-sm text-neutral-700">
                   Ready to claim a deal? Email us what you want and we’ll confirm everything within 48 hours.
@@ -452,6 +445,143 @@ export default function Home() {
                   className="px-6 py-3 rounded-full bg-brand-lime text-brand-ink font-semibold hover:opacity-90 transition text-center"
                 >
                   Email to Claim an Offer
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+
+      {/* BUNDLE DEALS (informational, no cards) */}
+      <section className="px-4 sm:px-6 lg:px-10 py-16 bg-gradient-to-b from-brand-stone via-brand-stone to-white">
+        <div className="max-w-6xl mx-auto">
+          {/* Header + CTA */}
+          <div className="rounded-3xl overflow-hidden border border-neutral-200 shadow-soft">
+            <div className="relative bg-brand-ink">
+              {/* subtle glow accents */}
+              <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-brand-lime/20 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-brand-sage/25 blur-3xl" />
+
+              <div className="relative p-6 sm:p-8">
+                <p className="text-xs tracking-luxe uppercase text-white/75">
+                  Bundle Deals
+                </p>
+                <h2 className="font-display text-4xl sm:text-5xl text-white mt-2">
+                  Save more with Classic & Signature bundle pricing
+                </h2>
+                <p className="mt-3 text-white/85 max-w-3xl">
+                  Shop-only for now—click the button to email us which bundle you want and we’ll confirm
+                  totals, shipping, and next steps.
+                </p>
+
+                <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                  <div className="text-sm text-white/85">
+                    ✨ New customer:{" "}
+                    <b className="text-white">
+                      10% OFF with code{" "}
+                      <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
+                        FIRSTGLOW
+                      </span>
+                    </b>
+                  </div>
+
+                  <a
+                    href="mailto:soapglowandbeautybar@gmail.com?subject=Bundle%20Deal%20Request%20-%20Soap%20Glow%20%26%20Beauty%20Bar&body=Hi%20Soap%20Glow%20%26%20Beauty%20Bar%2C%0A%0AI%27d%20like%20to%20take%20advantage%20of%20a%20bundle%20deal.%20Here%27s%20what%20I%20want%3A%0A%0ACollection%20(Classic%20or%20Signature)%3A%0ABundle%20size%20(1%20bar%2C%203%20bars%2C%205%20bars)%3A%0AName%3A%0APhone%3A%0AShipping%20Address%3A%0A%0AThank%20you!%0A"
+                    className="px-6 py-3 rounded-full bg-brand-lime text-brand-ink font-semibold hover:opacity-90 transition text-center"
+                  >
+                    Email to Claim a Bundle
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Offer lists */}
+            <div className="bg-white">
+              <div className="grid lg:grid-cols-2">
+                {/* Classic Collection */}
+                <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-neutral-200">
+                  <p className="text-xs tracking-luxe uppercase text-brand-sage">
+                    Classic Collection
+                  </p>
+                  <h3 className="font-display text-2xl text-brand-ink mt-2">
+                    Everyday favorites
+                  </h3>
+                  <p className="mt-2 text-sm text-neutral-700">
+                    Mix and match any soaps from the Classic Collection.
+                  </p>
+
+                  <div className="mt-5 rounded-2xl bg-brand-ink p-5">
+                    <OfferLine
+                      label="1 Bar — Everyday Value"
+                      price="10"
+                    />
+                    <OfferLine
+                      label="3 Bar Bundle — Best Seller"
+                      price="26"
+                      compareAt="30"
+                      savings="4"
+                    />
+                    <OfferLine
+                      label="5 Bar Bundle"
+                      price="44"
+                      compareAt="50"
+                      savings="6"
+                    />
+                  </div>
+
+                  <p className="mt-4 text-xs text-neutral-600">
+                    Great for trying customer favorites at a better value.
+                  </p>
+                </div>
+
+                {/* Signature Collection */}
+                <div className="p-6 sm:p-8">
+                  <p className="text-xs tracking-luxe uppercase text-brand-sage">
+                    Signature Collection
+                  </p>
+                  <h3 className="font-display text-2xl text-brand-ink mt-2">
+                    Premium glow essentials
+                  </h3>
+                  <p className="mt-2 text-sm text-neutral-700">
+                    Mix and match any soaps from the Signature Collection.
+                  </p>
+
+                  <div className="mt-5 rounded-2xl bg-brand-ink p-5">
+                    <OfferLine
+                      label="1 Bar — Everyday Value"
+                      price="12"
+                    />
+                    <OfferLine
+                      label="3 Bar Bundle — Fan Favorite"
+                      price="32"
+                      compareAt="36"
+                      savings="4"
+                    />
+                    <OfferLine
+                      label="5 Bar Bundle"
+                      price="50"
+                      compareAt="60"
+                      savings="10"
+                    />
+                  </div>
+
+                  <p className="mt-4 text-xs text-neutral-600">
+                    Perfect for stocking up on the richest, most premium formulas.
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom CTA */}
+              <div className="px-6 sm:px-8 py-6 border-t border-neutral-200 bg-white flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                <p className="text-sm text-neutral-700">
+                  Ready to claim a bundle? Email us which collection and bundle size you want, and we’ll confirm everything within 48 hours.
+                </p>
+
+                <a
+                  href="mailto:soapglowandbeautybar@gmail.com?subject=Bundle%20Deal%20Request%20-%20Soap%20Glow%20%26%20Beauty%20Bar&body=Hi%20Soap%20Glow%20%26%20Beauty%20Bar%2C%0A%0AI%27d%20like%20to%20take%20advantage%20of%20a%20bundle%20deal.%20Here%27s%20what%20I%20want%3A%0A%0ACollection%20(Classic%20or%20Signature)%3A%0ABundle%20size%20(1%20bar%2C%203%20bars%2C%205%20bars)%3A%0AName%3A%0APhone%3A%0AShipping%20Address%3A%0A%0AThank%20you!%0A"
+                  className="px-6 py-3 rounded-full bg-brand-lime text-brand-ink font-semibold hover:opacity-90 transition text-center"
+                >
+                  Email to Claim a Bundle
                 </a>
               </div>
             </div>

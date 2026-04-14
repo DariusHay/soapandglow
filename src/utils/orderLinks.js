@@ -19,4 +19,4 @@ Thank you!
   return `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
-export const instagramUrl = "https://instagram.com/theglow_upbeautybar";
+export const instagramUrl = "https://www.instagram.com/soapglowandbeautybar";

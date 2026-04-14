@@ -32,7 +32,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
               >
-                @TheGlow_UpBeautyBar
+                @soapglowandbeautybar
               </a>
             </p>
             <p className="mt-3 text-xs text-neutral-500">
@@ -46,9 +46,7 @@ export default function Footer() {
             Shop Info
           </p>
           <ul className="mt-4 space-y-2 text-sm">
-            <li className="text-neutral-700">📦 $6 flat shipping under $50</li>
-            <li className="text-neutral-700">🎉 Free shipping on $50+</li>
-            <li className="text-neutral-700">✨ FIRSTGLOW: 15% off + free ship $35+</li>
+            <li className="text-neutral-700">✨ FIRSTGLOW: 10% off for first time customers</li>
           </ul>
         </div>
 
