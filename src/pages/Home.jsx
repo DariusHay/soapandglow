@@ -176,10 +176,10 @@ export default function Home() {
                 📦 Free Shipping for Orders <b className="text-white">$50+</b>
               </p> */}
               <p className="text-white/90">
-                ✨ New Customers Receive <b className="text-white">10% off with code</b>
-                <span className="ml-2 inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold">
+                ✨ New Customers Receive <b className="text-white">10% off</b>
+                {/* <span className="ml-2 inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold">
                   FIRSTGLOW
-                </span>
+                </span> */}
               </p>
             </div>
           </div>
@@ -478,10 +478,10 @@ export default function Home() {
                   <div className="text-sm text-white/85">
                     ✨ New customer:{" "}
                     <b className="text-white">
-                      10% OFF with code{" "}
-                      <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
+                      10% OFF 
+                      {/* <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
                         FIRSTGLOW
-                      </span>
+                      </span> */}
                     </b>
                   </div>
 
