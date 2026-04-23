@@ -41,7 +41,9 @@ export default function TermsPolicy() {
 
       <h3>Questions?</h3>
       <p>
-        Contact: <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a>
+        Contact: <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a>
+        <br />
+        Phone: <a href="tel:3219393483">321-939-3483</a>
       </p>
     </PolicyLayout>
   );

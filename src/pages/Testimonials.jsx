@@ -11,11 +11,11 @@ export default function Testimonials() {
             Real results. Real glow.
           </h1>
           <p className="mt-3 text-neutral-700">
-            Add your customer testimonials here (cards/grid). This page is built to scale.
+            Customer testimonials and reviews for our handcrafted soaps. See what our customers are saying about their glow experience.
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1,2,3].map((i) => (
+            {[1].map((i) => (
               <div key={i} className="rounded-3xl bg-white border border-neutral-200 p-6 shadow-soft">
                 <p className="text-sm text-neutral-700">
                   “This soap made my skin feel so soft. The scent is beautiful and the bar looks amazing.”

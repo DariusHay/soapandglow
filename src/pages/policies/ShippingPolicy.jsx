@@ -12,9 +12,7 @@ export default function ShippingPolicy() {
 
       <h3>Shipping rates</h3>
       <ul>
-        <li>Orders under $50: $6 flat-rate shipping</li>
-        <li>Orders $50+: FREE SHIPPING</li>
-        <li>Subscriptions: FREE SHIPPING always</li>
+        <li>Shipping fees will apply to all orders.</li>
       </ul>
 
       <h3>Delivery time</h3>
@@ -26,7 +24,7 @@ export default function ShippingPolicy() {
       <h3>Local pickup (if applicable)</h3>
       <p>
         Free local pickup may be available. Select at checkout and we’ll email when your order is ready.
-        (Confirm availability before publishing.)
+        (Confirm availability before purchasing).
       </p>
 
       <h3>International shipping</h3>
@@ -34,7 +32,7 @@ export default function ShippingPolicy() {
 
       <h3>Lost or damaged packages</h3>
       <p>
-        Contact us at <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a> within 7 days of delivery.
+        Contact us at <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a> or <a href="tel:3219393483">321-939-3483</a> within 7 days of delivery.
         We’ll help resolve the issue.
       </p>
     </PolicyLayout>

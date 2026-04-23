@@ -30,7 +30,7 @@ export default function ProductDetail() {
     );
   }
 
-  const mainImg = product.images?.[0];
+  const mainImg = product.image;
   const hasImage = Boolean(mainImg);
 
   return (
@@ -113,12 +113,15 @@ export default function ProductDetail() {
               >
                 DM on Instagram
               </a>
-              <button
+              {/* <button
                 onClick={() => navigator.clipboard?.writeText(product.name)}
                 className="w-full sm:w-auto px-6 py-3 rounded-full border border-neutral-300 hover:border-neutral-500 transition text-center"
               >
                 Copy Name
-              </button>
+              </button> */}
+              <a href="tel:3219393483" className="w-full sm:w-auto px-6 py-3 rounded-full border border-neutral-300 hover:border-neutral-500 transition text-center">
+                Order by Phone
+              </a>
             </div>
 
             <div className="mt-8 rounded-3xl border border-neutral-200 p-6 bg-neutral-50">

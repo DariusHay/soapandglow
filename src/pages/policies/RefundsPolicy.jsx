@@ -18,7 +18,7 @@ export default function RefundsPolicy() {
 
       <h3>To request a return or refund</h3>
       <ul>
-        <li>Email us at <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a> with your order number and photos (if damaged)</li>
+        <li>Email us at <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a> with your order number and photos (if damaged)</li>
         <li>We’ll respond within 48 hours with return instructions</li>
       </ul>
 
@@ -49,7 +49,8 @@ export default function RefundsPolicy() {
       </p>
 
       <h3>Questions?</h3>
-      <p>Email: <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a></p>
+      <p>Email: <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a></p>
+      <p>Phone: <a href="tel:3219393483">321-939-3483</a></p>
     </PolicyLayout>
   );
 }

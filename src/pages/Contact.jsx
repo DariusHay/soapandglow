@@ -26,6 +26,9 @@ export default function Contact() {
               @soapglowandbeautybar
             </a>
 
+            <p className="text-sm font-semibold text-brand-ink mt-6">Phone</p>
+            <a className="underline underline-offset-4 text-neutral-700" href="tel:3219393483">321-939-3483</a>
+
             <p className="text-sm font-semibold text-brand-ink mt-6">Vendor availability</p>
             <p className="text-sm text-neutral-700">
               Available to be a vendor for events. Email with date, location, and expected attendance.

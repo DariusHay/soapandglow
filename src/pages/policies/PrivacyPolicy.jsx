@@ -1,4 +1,5 @@
 import PolicyLayout from "./PolicyLayout";
+import { instagramUrl } from "../../utils/orderLinks";
 
 export default function PrivacyPolicy() {
   return (
@@ -32,7 +33,7 @@ export default function PrivacyPolicy() {
       <p>You can opt out anytime by:</p>
       <ul>
         <li>Clicking “unsubscribe” in any email</li>
-        <li>Emailing <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a></li>
+        <li>Emailing <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a></li>
       </ul>
       <p>We will never sell or share your email address with third parties for marketing purposes.</p>
 
@@ -77,7 +78,7 @@ export default function PrivacyPolicy() {
         <li>Opt out of marketing communications</li>
         <li>Request a copy of your data</li>
       </ul>
-      <p>To exercise these rights, email: <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a></p>
+      <p>To exercise these rights, email: <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a></p>
 
       <h3>Changes to this policy</h3>
       <p>
@@ -86,8 +87,9 @@ export default function PrivacyPolicy() {
 
       <h3>Contact us</h3>
       <p>
-        Email: <a href="mailto:Ladyjo3000@gmail.com">Ladyjo3000@gmail.com</a><br />
-        Instagram: @SoapGlowBeautyBar
+        Email: <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a><br />
+        Instagram: <a href={instagramUrl} target="_blank" rel="noreferrer">@SoapGlowBeautyBar</a><br />
+        Phone: <a href="tel:3219393483">321-939-3483</a>
       </p>
     </PolicyLayout>
   );
