@@ -1,4 +1,32 @@
 const tropicalCitrusImage = import.meta.env.BASE_URL + 'images/tropical-citrus.png';
+const nagChampaMudImage = import.meta.env.BASE_URL + 'images/mug.png';
+const oatmealMilkHoneyImage = import.meta.env.BASE_URL + 'images/oatmeal-milk-honey.png';
+const turmericHoneyImage = import.meta.env.BASE_URL + 'images/turmeric-honey.png';
+const orangeSweetMustImage = import.meta.env.BASE_URL + 'images/orange-sweet-must.png';
+const pumpkinSpiceImage = import.meta.env.BASE_URL + 'images/pumpkin-spice.png';
+const alwaysAMoorImage = import.meta.env.BASE_URL + 'images/always-a-moor.png';
+const appleRoseImage = import.meta.env.BASE_URL + 'images/apple-rose.png';
+const blueSeaGoatMilkImage = import.meta.env.BASE_URL + 'images/blue-sea-goat-milk.png';
+const islandCitrusImage = import.meta.env.BASE_URL + 'images/island-citrus.png';
+const dragonBloodImage = import.meta.env.BASE_URL + 'images/dragon-blood.png';
+const citrusSplashGoatMilkImage = import.meta.env.BASE_URL + 'images/citrus-splash-goat-milk.png';
+const frenchPearImage = import.meta.env.BASE_URL + 'images/french-pear.png';
+const wakameImage = import.meta.env.BASE_URL + 'images/wakame.png';
+const lavenderMintImage = import.meta.env.BASE_URL + 'images/lavender-mint.png';
+const deadSeaMudImage = import.meta.env.BASE_URL + 'images/dead-sea-mud.png';
+const charcoalAloeImage = import.meta.env.BASE_URL + 'images/charcoal-aloe.png';
+const seaJasmineLimeImage = import.meta.env.BASE_URL + 'images/sea-jasmine-lime.png';
+const pinkLemonadeImage = import.meta.env.BASE_URL + 'images/pink-lemonade.png';
+const mangoSalsaImage = import.meta.env.BASE_URL + 'images/mango-salsa.png';
+const sweetAlmondGreekYogurtImage = import.meta.env.BASE_URL + 'images/sweet-almond-greek-yogurt.png';
+const cedarwoodTeaTreeImage = import.meta.env.BASE_URL + 'images/cedarwood-tea-tree.png';
+const peachImage = import.meta.env.BASE_URL + 'images/peach.png';
+const raspberryPatchouliImage = import.meta.env.BASE_URL + 'images/raspberry-patchouli.png';
+const bananaCoconutScrubImage = import.meta.env.BASE_URL + 'images/banana-coconut-scrub.png';
+const bayberryCitrusImage = import.meta.env.BASE_URL + 'images/bayberry-citrus.png';
+const cottonFieldsImage = import.meta.env.BASE_URL + 'images/cotton-fields.png';
+const moroccanVanillaGoatMilkImage = import.meta.env.BASE_URL + 'images/moroccan-vanilla-goat-milk.png';
+const milkCollagenImage = import.meta.env.BASE_URL + 'images/milk-collagen.png';
 
 export const products = [
   {
@@ -35,7 +63,7 @@ export const products = [
       "Helps unclog pores",
       "Creates a spa-like ritual experience",
     ],
-    image: "",
+    image: nagChampaMudImage,
   },
   {
     id: "oatmeal-milk-honey",
@@ -53,7 +81,7 @@ export const products = [
       "Deeply moisturizing",
       "Gentle enough for eczema-prone skin",
     ],
-    image: "",
+    image: oatmealMilkHoneyImage,
   },
   {
     id: "turmeric-honey",
@@ -71,7 +99,7 @@ export const products = [
       "Brightens dull complexion",
       "Supports radiant-looking skin",
     ],
-    image: "",
+    image: turmericHoneyImage,
   },
   {
     id: "orange-sweet-must",
@@ -89,7 +117,7 @@ export const products = [
       "Supports collagen production",
       "Gently exfoliates",
     ],
-    image: "",
+    image: orangeSweetMustImage,
   },
   {
     id: "pumpkin-spice",
@@ -107,7 +135,7 @@ export const products = [
       "Nourishes and repairs skin",
       "Softens rough dry patches",
     ],
-    image: "",
+    image: pumpkinSpiceImage,
   },
   {
     id: "always-a-moor",
@@ -125,7 +153,7 @@ export const products = [
       "Retains moisture",
       "Refines skin texture",
     ],
-    image: "",
+    image: alwaysAMoorImage,
   },
   {
     id: "apple-rose",
@@ -143,7 +171,7 @@ export const products = [
       "Soothes sensitive skin",
       "Minimizes appearance of pores",
     ],
-    image: "",
+    image: appleRoseImage,
   },
   {
     id: "blue-sea-goat-milk",
@@ -161,7 +189,7 @@ export const products = [
       "Deeply moisturizes",
       "Strengthens moisture barrier",
     ],
-    image: "",
+    image: blueSeaGoatMilkImage,
   },
   {
     id: "island-citrus",
@@ -179,7 +207,7 @@ export const products = [
       "Tightens pores",
       "Defends against environmental stress",
     ],
-    image: "",
+    image: islandCitrusImage,
   },
   {
     id: "dragon-blood",
@@ -197,7 +225,7 @@ export const products = [
       "Supports regeneration",
       "Protects against damage",
     ],
-    image: "",
+    image: dragonBloodImage,
   },
   {
     id: "citrus-splash-goat-milk",
@@ -215,7 +243,7 @@ export const products = [
       "Brightens dull skin",
       "Leaves skin conditioned",
     ],
-    image: "",
+    image: citrusSplashGoatMilkImage,
   },
   {
     id: "french-pear",
@@ -233,7 +261,7 @@ export const products = [
       "Hydrates dry skin",
       "Suitable for sensitive skin",
     ],
-    image: "",
+    image: frenchPearImage,
   },
   {
     id: "wakame",
@@ -251,7 +279,7 @@ export const products = [
       "Deeply hydrates",
       "Combats free radicals",
     ],
-    image: "",
+    image: wakameImage,
   },
   {
     id: "lavender-mint",
@@ -269,7 +297,7 @@ export const products = [
       "Cooling sensation",
       "Helps keep skin clean",
     ],
-    image: "",
+    image: lavenderMintImage,
   },
   {
     id: "dead-sea-mud",
@@ -287,7 +315,7 @@ export const products = [
       "Reduces inflammation and redness",
       "Leaves skin soft and refreshed",
     ],
-    image: "",
+    image: deadSeaMudImage,
   },
   {
     id: "charcoal-aloe",
@@ -305,7 +333,7 @@ export const products = [
       "Soothes and rehydrates",
       "Ideal for oily or acne-prone skin",
     ],
-    image: "",
+    image: charcoalAloeImage,
   },
   {
     id: "sea-jasmine-lime",
@@ -323,7 +351,7 @@ export const products = [
       "Gently exfoliates dull skin",
       "Refreshes stressed skin",
     ],
-    image: "",
+    image: seaJasmineLimeImage,
   },
   {
     id: "pink-lemonade",
@@ -341,7 +369,7 @@ export const products = [
       "Gentle exfoliation",
       "Suitable for all skin types",
     ],
-    image: "",
+    image: pinkLemonadeImage,
   },
   {
     id: "mango-salsa",
@@ -359,7 +387,7 @@ export const products = [
       "Gently renews skin surface",
       "Softens rough patches",
     ],
-    image: "",
+    image: mangoSalsaImage,
   },
   {
     id: "sweet-almond-greek-yogurt",
@@ -377,7 +405,7 @@ export const products = [
       "Deeply conditions skin",
       "Supports healthy skin barrier",
     ],
-    image: "",
+    image: sweetAlmondGreekYogurtImage,
   },
   {
     id: "cedarwood-tea-tree",
@@ -395,7 +423,7 @@ export const products = [
       "Regulates excess sebum",
       "Purifies pores without over-drying",
     ],
-    image: "",
+    image: cedarwoodTeaTreeImage,
   },
   {
     id: "peach",
@@ -413,7 +441,7 @@ export const products = [
       "Brightens dull complexions",
       "Softens rough skin",
     ],
-    image: "",
+    image: peachImage,
   },
   {
     id: "raspberry-patchouli",
@@ -431,7 +459,7 @@ export const products = [
       "Helps soothe redness",
       "Tightens pores and reduces shine",
     ],
-    image: "",
+    image: raspberryPatchouliImage,
   },
   {
     id: "banana-coconut-scrub",
@@ -449,7 +477,7 @@ export const products = [
       "Buffs away dead skin",
       "Ideal for dry cracked areas",
     ],
-    image: "",
+    image: bananaCoconutScrubImage,
   },
   {
     id: "bayberry-citrus",
@@ -467,7 +495,7 @@ export const products = [
       "Brightens complexion",
       "Removes impurities gently",
     ],
-    image: "",
+    image: bayberryCitrusImage,
   },
   {
     id: "cotton-fields",
@@ -485,7 +513,7 @@ export const products = [
       "Ideal for sensitive skin",
       "Preserves natural oils",
     ],
-    image: "",
+    image: cottonFieldsImage,
   },
   {
     id: "moroccan-vanilla-goat-milk",
@@ -503,7 +531,7 @@ export const products = [
       "Gently exfoliates",
       "Adds softness and radiance",
     ],
-    image: "",
+    image: moroccanVanillaGoatMilkImage,
   },
   {
     id: "milk-collagen",
@@ -521,6 +549,6 @@ export const products = [
       "Hydrates and softens",
       "Promotes a plumper look",
     ],
-    image: "",
+    image: milkCollagenImage,
   },
 ];
