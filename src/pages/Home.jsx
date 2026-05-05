@@ -87,8 +87,8 @@ export default function Home() {
   return (
     <div className="bg-white">
       <SEO
-        title="Soap Glow & Beauty Bar"
-        description="Handcrafted organic soaps made with purpose—shop bestsellers, bundles, and glow-ready essentials."
+        title="Soap Glow & Beauty Bar | Organic Soap Orlando, FL"
+        description="Shop handcrafted organic soap in Orlando, FL from Soap Glow & Beauty Bar. Faith-driven, handmade soap bars made with nourishing ingredients for everyday glow."
       />
 
       {/* Modal (optional) */}
@@ -124,7 +124,7 @@ export default function Home() {
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-16 pb-14 text-white">
           {/* kicker */}
           <p className="text-xs tracking-luxe uppercase text-white/85">
-            Faith-driven • Organic • Handmade
+            Faith-driven • Organic • Handmade • Orlando, FL
           </p>
 
           {/* headline (NOT “Elevate Your Glow”) */}
@@ -478,7 +478,7 @@ export default function Home() {
                   <div className="text-sm text-white/85">
                     ✨ New customer:{" "}
                     <b className="text-white">
-                      10% OFF 
+                      10% OFF
                       {/* <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-3 py-1 text-xs font-semibold ml-1">
                         FIRSTGLOW
                       </span> */}

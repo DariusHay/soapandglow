@@ -10,8 +10,7 @@ export default function Footer() {
             Soap <span className="text-brand-lime">Glow</span>
           </p>
           <p className="mt-3 text-sm text-neutral-700 max-w-md">
-            Experience the luxury of handcrafted soap made with organic ingredients to
-            nourish your skin and elevate your spirit.
+            Handcrafted organic soap in Orlando, FL.
           </p>
 
           <div className="mt-5 text-sm text-neutral-700 space-y-1">
