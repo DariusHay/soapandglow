@@ -3,7 +3,7 @@ import SEO from "../components/SEO";
 import FirstGlowModal from "../components/FirstGlowModal";
 import ProductCard from "../components/ProductCard";
 import EmailSignup from "../components/EmailSignup";
-import { products } from "../data/products";
+import { products } from "../data/Products";
 import { instagramUrl } from "../utils/orderLinks";
 import { offers } from "../data/offers";
 import flyerImg from "../assets/soapglow.jpg";
