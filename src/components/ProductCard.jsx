@@ -10,19 +10,19 @@ export default function ProductCard({ product }) {
       to={`/shop/${product.slug}`}
       className="group block rounded-3xl overflow-hidden bg-white border border-neutral-200 shadow-soft hover:shadow-xl transition"
     >
-      <div
+      {/* <div
         className={`h-3 ${
           isSignature ? "bg-brand-plum" : "bg-brand-lime"
         }`}
-      />
+      /> */}
 
       {hasImage ? (
-        <div className="aspect-[4/5] overflow-hidden">
+        <div className="aspect-[4/3.5] overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="h-full w-full object-contain group-hover:scale-[1.04] transition-transform duration-500"
+            className="h-full w-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-500"
           />
         </div>
       ) : (
@@ -54,20 +54,20 @@ export default function ProductCard({ product }) {
         </div>
       )}
 
-      <div className="p-6">
+      <div className="p-4">
         <div className="flex items-start justify-between gap-4">
           <div>
-            {/* <p className="text-xs tracking-luxe uppercase text-neutral-500">
+            <p className="text-xs tracking-luxe uppercase text-neutral-500">
               {product.collection}
-            </p> */}
+            </p>
             <h3 className="font-display text-2xl text-brand-ink mt-1">
               {product.name}
             </h3>
           </div>
 
-          {/* <p className="text-sm font-semibold text-brand-ink whitespace-nowrap">
+          <p className="text-sm font-semibold text-brand-ink whitespace-nowrap">
             {formatPrice(product.price, "USD")}
-          </p> */}
+          </p>
         </div>
 
         <p className="mt-3 text-sm text-neutral-700">

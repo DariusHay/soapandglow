@@ -1,3 +1,5 @@
+const tropicalCitrusImage = "public/images/tropical-citrus.png";
+
 export const products = [
   {
     id: "tropical-citrus",
@@ -15,7 +17,7 @@ export const products = [
       "Helps brighten and even tone",
       "Protects against environmental stressors",
     ],
-    image: "",
+    image: tropicalCitrusImage,
   },
   {
     id: "nag-champa-mud",
