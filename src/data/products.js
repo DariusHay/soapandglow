@@ -1,4 +1,4 @@
-const tropicalCitrusImage = "public/images/tropical-citrus.png";
+const tropicalCitrusImage = import.meta.env.BASE_URL + 'images/tropical-citrus.png';
 
 export const products = [
   {
