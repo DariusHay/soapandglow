@@ -102,9 +102,9 @@ export const products = [
     image: turmericHoneyImage,
   },
   {
-    id: "orange-sweet-must",
-    slug: "orange-sweet-must",
-    name: "Orange Sweet Must",
+    id: "orange-sweet-musk",
+    slug: "orange-sweet-musk",
+    name: "Orange Sweet Musk",
     collection: "Classic Collection",
     category: "Classic Collection",
     price: 10,
