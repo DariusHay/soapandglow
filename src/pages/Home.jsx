@@ -6,7 +6,7 @@ import EmailSignup from "../components/EmailSignup";
 import { products } from "../data/Products";
 import { instagramUrl } from "../utils/orderLinks";
 import { offers } from "../data/offers";
-import flyerImg from "../assets/soapglow.jpg";
+import flyerImg from "../assets/soapglower.PNG";
 import heroImg from "../assets/hero.jpg";
 
 function OfferCard({ name, details, price, compareAt, savings, note, featured }) {
