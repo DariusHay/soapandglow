@@ -89,6 +89,7 @@ export async function handler(event) {
           merchant_support_email:
             process.env.MERCHANT_SUPPORT_EMAIL ||
             "soapglowandbeautybar@gmail.com",
+          enable_coupon: false,
           ask_for_shipping_address:
             process.env.SQUARE_ASK_FOR_SHIPPING !== "false",
         },
