@@ -12,7 +12,12 @@ export default function ShippingPolicy() {
 
       <h3>Shipping rates</h3>
       <ul>
-        <li>Shipping fees will apply to all orders.</li>
+        <li>Orders up to $25.00: $6.00</li>
+        <li>Orders over $25.00 through $50.00: $8.50</li>
+        <li>Orders over $50.00 through $75.00: $10.00</li>
+        <li>Orders over $75.00 through $100.00: $12.00</li>
+        <li>Orders over $100.00 through $150.00: $14.00</li>
+        <li>Orders over $150.00: $16.00</li>
       </ul>
 
       <h3>Delivery time</h3>
@@ -20,12 +25,6 @@ export default function ShippingPolicy() {
         <li>Standard shipping: 5–7 business days after processing</li>
         <li>Delivery times may vary by destination and carrier</li>
       </ul>
-
-      <h3>Local pickup (if applicable)</h3>
-      <p>
-        Free local pickup may be available. Contact us before purchasing to
-        confirm availability and arrange pickup.
-      </p>
 
       <h3>International shipping</h3>
       <p>We currently ship within the United States only.</p>

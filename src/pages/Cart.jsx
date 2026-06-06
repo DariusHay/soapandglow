@@ -7,9 +7,19 @@ const checkoutEndpoint =
   import.meta.env.VITE_SQUARE_CHECKOUT_ENDPOINT ||
   "/.netlify/functions/create-square-checkout";
 
+function calculateShipping(subtotal) {
+  if (subtotal <= 25) return 6;
+  if (subtotal <= 50) return 8.5;
+  if (subtotal <= 75) return 10;
+  if (subtotal <= 100) return 12;
+  if (subtotal <= 150) return 14;
+  return 16;
+}
+
 export default function Cart() {
   const { items, itemCount, subtotal, updateQuantity, removeItem, clearCart } =
     useCart();
+  const shipping = calculateShipping(subtotal);
 
   async function handleCheckout() {
     if (!items.length) return;
@@ -116,15 +126,19 @@ export default function Cart() {
                     <span>{formatPrice(subtotal)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Shipping & tax</span>
-                    <span>Not included in subtotal</span>
+                    <span>Standard shipping</span>
+                    <span>{formatPrice(shipping)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Sales tax</span>
+                    <span>Calculated by Square</span>
                   </div>
                 </div>
 
                 <div className="mt-5 border-t border-neutral-200 pt-5">
                   <div className="flex items-center justify-between text-lg font-semibold text-brand-ink">
-                    <span>Subtotal</span>
-                    <span>{formatPrice(subtotal)}</span>
+                    <span>Before tax</span>
+                    <span>{formatPrice(subtotal + shipping)}</span>
                   </div>
                 </div>
 

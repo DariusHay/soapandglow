@@ -77,7 +77,6 @@ export default function ProductDetail() {
 
               <div className="flex gap-2 flex-wrap justify-end">
                 <InfoPill>Square checkout</InfoPill>
-                <InfoPill>FIRSTGLOW</InfoPill>
               </div>
             </div>
 
@@ -130,13 +129,7 @@ export default function ProductDetail() {
             </div>
 
             <div className="mt-8 rounded-3xl border border-neutral-200 p-6 bg-neutral-50">
-             
-              <ul className="mt-3 text-sm text-neutral-700 space-y-2">
-                <li>
-                  ✨ New customer: <b>10% OFF </b>
-                </li>
-              </ul>
-              <p className="mt-4 text-xs text-neutral-500">
+              <p className="text-xs text-neutral-500">
                 Allergy note: Always review ingredients. Discontinue use if irritation occurs.
               </p>
             </div>

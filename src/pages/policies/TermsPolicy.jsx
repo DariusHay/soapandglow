@@ -18,7 +18,6 @@ export default function TermsPolicy() {
       <ul>
         <li>All prices are in USD</li>
         <li>Prices subject to change without notice</li>
-        <li>Promotions and discounts cannot be combined unless stated</li>
       </ul>
 
       <h3>Payment</h3>

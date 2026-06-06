@@ -46,7 +46,15 @@ export default function Footer() {
             Shop Info
           </p>
           <ul className="mt-4 space-y-2 text-sm">
-            <li className="text-neutral-700">✨ FIRSTGLOW: 10% off for first time customers</li>
+            <li className="text-neutral-700">United States shipping only</li>
+            <li>
+              <Link
+                className="hover:underline underline-offset-4"
+                to="/policies/shipping"
+              >
+                View shipping rates
+              </Link>
+            </li>
           </ul>
         </div>
 

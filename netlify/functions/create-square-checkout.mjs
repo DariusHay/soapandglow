@@ -42,6 +42,23 @@ function normalizeItems(items = []) {
   });
 }
 
+function calculateSubtotalCents(lineItems) {
+  return lineItems.reduce(
+    (total, item) =>
+      total + item.base_price_money.amount * Number(item.quantity),
+    0
+  );
+}
+
+function calculateShippingCents(subtotalCents) {
+  if (subtotalCents <= 2500) return 600;
+  if (subtotalCents <= 5000) return 850;
+  if (subtotalCents <= 7500) return 1000;
+  if (subtotalCents <= 10000) return 1200;
+  if (subtotalCents <= 15000) return 1400;
+  return 1600;
+}
+
 export async function handler(event) {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders };
@@ -67,6 +84,9 @@ export async function handler(event) {
       return json(400, { error: "Cart is empty." });
     }
 
+    const shippingCents = calculateShippingCents(
+      calculateSubtotalCents(lineItems)
+    );
     const siteUrl = process.env.SITE_URL || "http://localhost:8888";
     const redirectUrl =
       process.env.SQUARE_SUCCESS_URL || `${siteUrl}/#/checkout/success`;
@@ -83,6 +103,9 @@ export async function handler(event) {
         order: {
           location_id: locationId,
           line_items: lineItems,
+          pricing_options: {
+            auto_apply_taxes: true,
+          },
         },
         checkout_options: {
           redirect_url: redirectUrl,
@@ -90,6 +113,14 @@ export async function handler(event) {
             process.env.MERCHANT_SUPPORT_EMAIL ||
             "soapglowandbeautybar@gmail.com",
           enable_coupon: false,
+          enable_loyalty: false,
+          shipping_fee: {
+            name: "Standard shipping",
+            charge: {
+              amount: shippingCents,
+              currency: "USD",
+            },
+          },
           ask_for_shipping_address:
             process.env.SQUARE_ASK_FOR_SHIPPING !== "false",
         },

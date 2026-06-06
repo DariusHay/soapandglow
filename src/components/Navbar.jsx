@@ -112,7 +112,7 @@ export default function Navbar() {
             </div>
 
             <p className="mt-4 text-xs text-neutral-500">
-              FREE shipping on $50+ • Code: <span className="font-semibold text-brand-plum">FIRSTGLOW</span>
+              Secure checkout powered by Square
             </p>
           </div>
         </div>
