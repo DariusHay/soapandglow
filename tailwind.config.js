@@ -1,3 +1,5 @@
+import typography from "@tailwindcss/typography";
+
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
@@ -21,5 +23,5 @@ export default {
       boxShadow: { soft: "0 20px 60px rgba(0,0,0,0.08)" },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [typography],
 };

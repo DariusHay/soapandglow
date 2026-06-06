@@ -7,6 +7,8 @@ import ProductDetail from "./pages/ProductDetail";
 import About from "./pages/About";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
+import Cart from "./pages/Cart";
+import Success from "./pages/checkout/Success";
 
 import RefundsPolicy from "./pages/policies/RefundsPolicy";
 import PrivacyPolicy from "./pages/policies/PrivacyPolicy";
@@ -27,6 +29,8 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout/success" element={<Success />} />
 
         <Route path="/policies/refunds" element={<RefundsPolicy />} />
         <Route path="/policies/privacy" element={<PrivacyPolicy />} />

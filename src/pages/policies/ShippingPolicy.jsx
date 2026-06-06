@@ -18,13 +18,13 @@ export default function ShippingPolicy() {
       <h3>Delivery time</h3>
       <ul>
         <li>Standard shipping: 5–7 business days after processing</li>
-        <li>Tracking information will be emailed when your order ships</li>
+        <li>Delivery times may vary by destination and carrier</li>
       </ul>
 
       <h3>Local pickup (if applicable)</h3>
       <p>
-        Free local pickup may be available. Select at checkout and we’ll email when your order is ready.
-        (Confirm availability before purchasing).
+        Free local pickup may be available. Contact us before purchasing to
+        confirm availability and arrange pickup.
       </p>
 
       <h3>International shipping</h3>

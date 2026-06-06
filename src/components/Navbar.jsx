@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useCart } from "../context/useCart";
 
 function BrandWordmark() {
   return (
@@ -21,12 +22,7 @@ const navClass = ({ isActive }) =>
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-
-  // Close menu when route changes
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
+  const { itemCount } = useCart();
 
   return (
     <header className="sticky top-0 z-40 bg-white/85 backdrop-blur border-b border-neutral-200">
@@ -40,9 +36,23 @@ export default function Navbar() {
           <NavLink to="/about" className={navClass}>About</NavLink>
           <NavLink to="/testimonials" className={navClass}>Reviews</NavLink>
           <NavLink to="/contact" className={navClass}>Contact</NavLink>
+          <NavLink to="/cart" className={navClass}>Cart</NavLink>
         </nav>
 
         <div className="flex items-center gap-3">
+          <Link
+            to="/cart"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-sm font-semibold text-brand-ink transition hover:border-brand-sage"
+            aria-label={`Cart with ${itemCount} item${itemCount === 1 ? "" : "s"}`}
+          >
+            Bag
+            {itemCount ? (
+              <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-lime px-1 text-[11px] text-brand-ink">
+                {itemCount}
+              </span>
+            ) : null}
+          </Link>
+
           {/* Desktop CTA */}
           <Link
             to="/shop"
@@ -72,13 +82,17 @@ export default function Navbar() {
       {/* Mobile menu panel */}
       {open ? (
         <div className="md:hidden border-t border-neutral-200 bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-5">
+          <div
+            className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-5"
+            onClick={() => setOpen(false)}
+          >
             <div className="grid gap-3">
               <NavLink to="/" className={navClass}>Home</NavLink>
               <NavLink to="/shop" className={navClass}>Shop</NavLink>
               <NavLink to="/about" className={navClass}>About</NavLink>
               <NavLink to="/testimonials" className={navClass}>Reviews</NavLink>
               <NavLink to="/contact" className={navClass}>Contact</NavLink>
+              <NavLink to="/cart" className={navClass}>Cart ({itemCount})</NavLink>
             </div>
 
             <div className="mt-5 grid gap-3">
@@ -89,12 +103,12 @@ export default function Navbar() {
                 Shop Now
               </Link>
 
-              <a
-                href="mailto:Ladyjo3000@gmail.com?subject=Order%20Request%20-%20Soap%20Glow%20%26%20Beauty%20Bar"
+              <Link
+                to="/cart"
                 className="px-6 py-3 rounded-full border border-neutral-300 hover:border-brand-sage transition text-center"
               >
-                Order via Email
-              </a>
+                View Cart
+              </Link>
             </div>
 
             <p className="mt-4 text-xs text-neutral-500">

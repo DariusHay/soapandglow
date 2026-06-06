@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import SEO from "../components/SEO";
+import AddToCartButton from "../components/AddToCartButton";
 import { products } from "../data/products";
 import { formatPrice } from "../utils/formatPrice";
-import { buildOrderEmail, instagramUrl } from "../utils/orderLinks";
+import { instagramUrl } from "../utils/orderLinks";
 
 function InfoPill({ children }) {
   return (
@@ -75,7 +76,7 @@ export default function ProductDetail() {
               </p>
 
               <div className="flex gap-2 flex-wrap justify-end">
-                <InfoPill>Shop-only</InfoPill>
+                <InfoPill>Square checkout</InfoPill>
                 <InfoPill>FIRSTGLOW</InfoPill>
               </div>
             </div>
@@ -99,12 +100,16 @@ export default function ProductDetail() {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <a
-                href={buildOrderEmail(product.name)}
+              <AddToCartButton
+                product={product}
+                className="w-full px-6 py-3 sm:w-auto"
+              />
+              <Link
+                to="/cart"
                 className="w-full sm:w-auto px-6 py-3 rounded-full bg-brand-lime text-brand-ink font-semibold hover:opacity-90 transition text-center"
               >
-                Order via Email
-              </a>
+                View Cart
+              </Link>
               <a
                 href={instagramUrl}
                 target="_blank"
@@ -120,7 +125,7 @@ export default function ProductDetail() {
                 Copy Name
               </button> */}
               <a href="tel:3219393483" className="w-full sm:w-auto px-6 py-3 rounded-full border border-neutral-300 hover:border-neutral-500 transition text-center">
-                Order by Phone
+                Questions? Call
               </a>
             </div>
 

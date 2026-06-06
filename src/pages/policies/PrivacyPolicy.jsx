@@ -22,7 +22,7 @@ export default function PrivacyPolicy() {
       <h3>How we use your information</h3>
       <ul>
         <li>Process and fulfill your orders</li>
-        <li>Send order confirmations and shipping updates</li>
+        <li>Communicate with you about your order when needed</li>
         <li>Respond to customer service requests</li>
         <li>Send marketing emails (only if you opt in)</li>
         <li>Improve our website and customer experience</li>

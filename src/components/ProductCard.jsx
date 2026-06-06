@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AddToCartButton from "./AddToCartButton";
 import { formatPrice } from "../utils/formatPrice";
 
 export default function ProductCard({ product }) {
@@ -6,10 +7,7 @@ export default function ProductCard({ product }) {
   const isSignature = product.collection === "Signature Collection";
 
   return (
-    <Link
-      to={`/shop/${product.slug}`}
-      className="group block rounded-3xl overflow-hidden bg-white border border-neutral-200 shadow-soft hover:shadow-xl transition"
-    >
+    <article className="group overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-soft transition hover:shadow-xl">
       {/* <div
         className={`h-3 ${
           isSignature ? "bg-brand-plum" : "bg-brand-lime"
@@ -17,16 +15,19 @@ export default function ProductCard({ product }) {
       /> */}
 
       {hasImage ? (
-        <div className="aspect-[4/3.5] overflow-hidden">
+        <Link to={`/shop/${product.slug}`} className="block aspect-[4/3.5] overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
             className="h-full w-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-500"
           />
-        </div>
+        </Link>
       ) : (
-        <div className="aspect-[4/3] px-6 py-6 bg-gradient-to-br from-brand-stone via-white to-brand-stone/40 flex flex-col justify-between">
+        <Link
+          to={`/shop/${product.slug}`}
+          className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-brand-stone via-white to-brand-stone/40 px-6 py-6"
+        >
           <div>
             <p className="text-xs tracking-luxe uppercase text-brand-sage">
               Handcrafted Soap
@@ -51,7 +52,7 @@ export default function ProductCard({ product }) {
               {formatPrice(product.price, "USD")}
             </span>
           </div>
-        </div>
+        </Link>
       )}
 
       <div className="p-4">
@@ -60,9 +61,12 @@ export default function ProductCard({ product }) {
             <p className="text-xs tracking-luxe uppercase text-neutral-500">
               {product.collection}
             </p>
-            <h3 className="font-display text-2xl text-brand-ink mt-1">
+            <Link
+              to={`/shop/${product.slug}`}
+              className="mt-1 block font-display text-2xl text-brand-ink hover:underline"
+            >
               {product.name}
-            </h3>
+            </Link>
           </div>
 
           <p className="text-sm font-semibold text-brand-ink whitespace-nowrap">
@@ -84,11 +88,9 @@ export default function ProductCard({ product }) {
         </ul>
 
         <div className="mt-5">
-          <span className="inline-flex items-center rounded-full bg-brand-lime text-brand-ink px-4 py-2 text-sm font-semibold">
-            Order Now
-          </span>
+          <AddToCartButton product={product} />
         </div>
       </div>
-    </Link>
+    </article>
   );
 }

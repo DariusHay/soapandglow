@@ -27,8 +27,8 @@ export default function Shop() {
             Handcrafted soaps for every glow
           </h1>
           <p className="mt-3 text-neutral-700 max-w-2xl">
-            Shop-only for now: choose your items, then order via email, phone or DM on Instagram
-            from the product page.
+            Choose your favorites, add them to your cart, and check out
+            securely through Square.
           </p>
 
           <div className="mt-6">
