@@ -6,6 +6,27 @@ import { instagramUrl } from "../utils/orderLinks";
 import flyerImg from "../assets/soapglower.PNG";
 import heroImg from "../assets/hero.jpg";
 
+const bundleOffers = [
+  {
+    collection: "Classic Collection",
+    description: "Mix and match any Classic Collection soaps.",
+    offers: [
+      { label: "1 bar", price: 10 },
+      { label: "3 bars", price: 26, regularPrice: 30 },
+      { label: "5 bars", price: 44, regularPrice: 50 },
+    ],
+  },
+  {
+    collection: "Signature Collection",
+    description: "Mix and match any Signature Collection soaps.",
+    offers: [
+      { label: "1 bar", price: 12 },
+      { label: "3 bars", price: 32, regularPrice: 36 },
+      { label: "5 bars", price: 50, regularPrice: 60 },
+    ],
+  },
+];
+
 export default function Home() {
   const featured = products.filter((p) => p.featured).slice(0, 6);
 
@@ -113,6 +134,78 @@ export default function Home() {
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 sm:px-6 lg:px-10 py-16 bg-gradient-to-b from-brand-stone via-brand-stone to-white">
+        <div className="max-w-6xl mx-auto overflow-hidden rounded-3xl border border-neutral-200 shadow-soft">
+          <div className="bg-brand-ink p-6 sm:p-8">
+            <p className="text-xs tracking-luxe uppercase text-white/75">
+              Bundle Deals
+            </p>
+            <h2 className="font-display text-4xl sm:text-5xl text-white mt-2">
+              Mix, match, and save
+            </h2>
+            <p className="mt-3 max-w-3xl text-white/85">
+              Add eligible soaps to your cart. Bundle savings apply
+              automatically at checkout.
+            </p>
+          </div>
+
+          <div className="grid bg-white lg:grid-cols-2">
+            {bundleOffers.map((bundle, index) => (
+              <div
+                key={bundle.collection}
+                className={[
+                  "p-6 sm:p-8",
+                  index === 0
+                    ? "border-b border-neutral-200 lg:border-b-0 lg:border-r"
+                    : "",
+                ].join(" ")}
+              >
+                <p className="text-xs tracking-luxe uppercase text-brand-sage">
+                  {bundle.collection}
+                </p>
+                <p className="mt-2 text-sm text-neutral-700">
+                  {bundle.description}
+                </p>
+                <div className="mt-5 rounded-2xl bg-brand-ink p-5">
+                  {bundle.offers.map((offer) => (
+                    <div
+                      key={offer.label}
+                      className="flex items-center justify-between gap-4 border-b border-white/25 py-3 last:border-b-0"
+                    >
+                      <div>
+                        <p className="text-sm font-semibold text-white">
+                          {offer.label}
+                        </p>
+                        {offer.regularPrice ? (
+                          <p className="text-xs text-white/75">
+                            Regularly ${offer.regularPrice}
+                          </p>
+                        ) : null}
+                      </div>
+                      <p className="text-sm font-semibold text-white">
+                        ${offer.price}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-neutral-200 bg-white px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+            <p className="text-sm text-neutral-700">
+              Bundle pricing is calculated separately for each collection.
+            </p>
+            <Link
+              to="/shop"
+              className="rounded-full bg-brand-lime px-6 py-3 text-center font-semibold text-brand-ink hover:opacity-90"
+            >
+              Shop bundle-eligible soaps
+            </Link>
           </div>
         </div>
       </section>

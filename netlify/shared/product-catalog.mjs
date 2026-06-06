@@ -1,9 +1,9 @@
 export const productCatalog = [
-  { slug: "tropical-citrus", name: "Tropical Citrus", priceCents: 1000 },
-  { slug: "nag-champa-mud", name: "Nag Champa Mud", priceCents: 1200 },
-  { slug: "oatmeal-milk-honey", name: "Oatmeal Milk & Honey", priceCents: 1200 },
-  { slug: "turmeric-honey", name: "Turmeric Honey", priceCents: 1200 },
-  { slug: "orange-sweet-must", name: "Orange Sweet Must", priceCents: 1000 },
+  { slug: "tropical-citrus", name: "Tropical Citrus", priceCents: 1000, collection: "Classic Collection" },
+  { slug: "nag-champa-mud", name: "Nag Champa Mud", priceCents: 1200, collection: "Signature Collection" },
+  { slug: "oatmeal-milk-honey", name: "Oatmeal Milk & Honey", priceCents: 1200, collection: "Signature Collection" },
+  { slug: "turmeric-honey", name: "Turmeric Honey", priceCents: 1200, collection: "Signature Collection" },
+  { slug: "orange-sweet-musk", name: "Orange Sweet Musk", priceCents: 1000, collection: "Classic Collection" },
   { slug: "pumpkin-spice", name: "Pumpkin Spice", priceCents: 1000 },
   { slug: "always-a-moor", name: "Always a Moor", priceCents: 1000 },
   { slug: "apple-rose", name: "Apple Rose", priceCents: 1000 },
@@ -31,5 +31,15 @@ export const productCatalog = [
 ];
 
 export function findProduct(slug) {
-  return productCatalog.find((product) => product.slug === slug);
+  const product = productCatalog.find((entry) => entry.slug === slug);
+  if (!product) return undefined;
+
+  return {
+    ...product,
+    collection:
+      product.collection ||
+      (product.priceCents === 1000
+        ? "Classic Collection"
+        : "Signature Collection"),
+  };
 }

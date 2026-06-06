@@ -17,8 +17,16 @@ function calculateShipping(subtotal) {
 }
 
 export default function Cart() {
-  const { items, itemCount, subtotal, updateQuantity, removeItem, clearCart } =
-    useCart();
+  const {
+    items,
+    itemCount,
+    merchandiseSubtotal,
+    bundleSavings,
+    subtotal,
+    updateQuantity,
+    removeItem,
+    clearCart,
+  } = useCart();
   const shipping = calculateShipping(subtotal);
 
   async function handleCheckout() {
@@ -123,8 +131,14 @@ export default function Cart() {
                 <div className="mt-5 space-y-3 text-sm text-neutral-700">
                   <div className="flex justify-between">
                     <span>{itemCount} item{itemCount === 1 ? "" : "s"}</span>
-                    <span>{formatPrice(subtotal)}</span>
+                    <span>{formatPrice(merchandiseSubtotal)}</span>
                   </div>
+                  {bundleSavings ? (
+                    <div className="flex justify-between text-brand-sage">
+                      <span>Bundle savings</span>
+                      <span>-{formatPrice(bundleSavings)}</span>
+                    </div>
+                  ) : null}
                   <div className="flex justify-between">
                     <span>Standard shipping</span>
                     <span>{formatPrice(shipping)}</span>

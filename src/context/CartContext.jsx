@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { products } from "../data/products";
 import { CartContext } from "./cart-context";
+import { calculateBundleSavingsCents } from "../../shared/bundle-pricing.mjs";
 const STORAGE_KEY = "soap-glow-cart";
 
 function readStoredCart() {
@@ -44,9 +45,20 @@ export function CartProvider({ children }) {
 
   const totals = useMemo(() => {
     const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const subtotal = cartItems.reduce((sum, item) => sum + item.lineTotal, 0);
+    const merchandiseSubtotal = cartItems.reduce(
+      (sum, item) => sum + item.lineTotal,
+      0
+    );
+    const bundleSavings =
+      calculateBundleSavingsCents(
+        cartItems.map((item) => ({
+          collection: item.product.collection,
+          quantity: item.quantity,
+        }))
+      ) / 100;
+    const subtotal = merchandiseSubtotal - bundleSavings;
 
-    return { itemCount, subtotal };
+    return { itemCount, merchandiseSubtotal, bundleSavings, subtotal };
   }, [cartItems]);
 
   function addItem(product, quantity = 1) {

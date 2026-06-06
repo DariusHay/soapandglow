@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
 import { findProduct } from "../shared/product-catalog.mjs";
+import { calculateBundleSavingsCents } from "../../shared/bundle-pricing.mjs";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN || "*",
@@ -33,6 +34,7 @@ function normalizeItems(items = []) {
     return {
       name: product.name,
       quantity: String(quantity),
+      collection: product.collection,
       base_price_money: {
         amount: product.priceCents,
         currency: "USD",
@@ -84,9 +86,10 @@ export async function handler(event) {
       return json(400, { error: "Cart is empty." });
     }
 
-    const shippingCents = calculateShippingCents(
-      calculateSubtotalCents(lineItems)
-    );
+    const bundleSavingsCents = calculateBundleSavingsCents(lineItems);
+    const discountedSubtotalCents =
+      calculateSubtotalCents(lineItems) - bundleSavingsCents;
+    const shippingCents = calculateShippingCents(discountedSubtotalCents);
     const siteUrl = process.env.SITE_URL || "http://localhost:8888";
     const redirectUrl =
       process.env.SQUARE_SUCCESS_URL || `${siteUrl}/#/checkout/success`;
@@ -102,7 +105,21 @@ export async function handler(event) {
         idempotency_key: crypto.randomUUID(),
         order: {
           location_id: locationId,
-          line_items: lineItems,
+          line_items: lineItems.map(({ collection, ...item }) => item),
+          ...(bundleSavingsCents
+            ? {
+                discounts: [
+                  {
+                    name: "Bundle savings",
+                    amount_money: {
+                      amount: bundleSavingsCents,
+                      currency: "USD",
+                    },
+                    scope: "ORDER",
+                  },
+                ],
+              }
+            : {}),
           pricing_options: {
             auto_apply_taxes: true,
           },
