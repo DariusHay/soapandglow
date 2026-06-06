@@ -102,7 +102,7 @@ export default function Home() {
               rel="noreferrer"
               className="px-7 py-3 rounded-full border border-white/70 text-white hover:border-white transition text-center backdrop-blur-sm bg-white/10"
             >
-              DM to Order
+              Follow on Instagram
             </a>
           </div>
 
