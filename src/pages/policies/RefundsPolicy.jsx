@@ -50,7 +50,7 @@ export default function RefundsPolicy() {
 
       <h3>Questions?</h3>
       <p>Email: <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a></p>
-      <p>Phone: <a href="tel:3219393483">321-939-3483</a></p>
+      <p>Phone: <a href="tel:3213933483">321-393-3483</a></p>
     </PolicyLayout>
   );
 }

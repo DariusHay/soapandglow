@@ -123,7 +123,7 @@ export default function ProductDetail() {
               >
                 Copy Name
               </button> */}
-              <a href="tel:3219393483" className="w-full sm:w-auto px-6 py-3 rounded-full border border-neutral-300 hover:border-neutral-500 transition text-center">
+              <a href="tel:3213933483" className="w-full sm:w-auto px-6 py-3 rounded-full border border-neutral-300 hover:border-neutral-500 transition text-center">
                 Questions? Call
               </a>
             </div>

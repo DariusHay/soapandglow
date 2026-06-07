@@ -223,13 +223,13 @@ export default function Cart() {
                     </p>
                     <div className="mt-3 flex gap-3 text-sm">
                       <a
-                        href="sms:+13219393483"
+                        href="sms:+13213933483"
                         className="underline underline-offset-4"
                       >
                         Text owner
                       </a>
                       <a
-                        href="tel:+13219393483"
+                        href="tel:+13213933483"
                         className="underline underline-offset-4"
                       >
                         Call owner
