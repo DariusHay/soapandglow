@@ -43,7 +43,7 @@ export default function TermsPolicy() {
       <p>
         Contact: <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a>
         <br />
-        Phone: <a href="tel:3219393483">321-939-3483</a>
+        Phone: <a href="tel:3213933483">321-393-3483</a>
       </p>
     </PolicyLayout>
   );

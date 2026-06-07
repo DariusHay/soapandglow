@@ -32,7 +32,7 @@ export default function ShippingPolicy() {
 
       <h3>Lost or damaged packages</h3>
       <p>
-        Contact us at <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a> or <a href="tel:3219393483">321-939-3483</a> within 7 days of delivery.
+        Contact us at <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a> or <a href="tel:3213933483">321-393-3483</a> within 7 days of delivery.
         We’ll help resolve the issue.
       </p>
     </PolicyLayout>

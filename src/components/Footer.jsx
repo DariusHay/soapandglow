@@ -34,7 +34,7 @@ export default function Footer() {
                 @soapglowandbeautybar
               </a>
             </p>
-            <p>Phone:{" "}<a href="tel:3219393483">321-939-3483</a></p>
+            <p>Phone:{" "}<a href="tel:3213933483">321-393-3483</a></p>
             <p className="mt-3 text-xs text-neutral-500">
               Allergy note: Always review ingredients. Discontinue use if irritation occurs.
             </p>
