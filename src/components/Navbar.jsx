@@ -42,10 +42,10 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             to="/cart"
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-sm font-semibold text-brand-ink transition hover:border-brand-sage"
+            className="relative inline-flex h-10 min-w-12 items-center justify-center rounded-full border border-neutral-200 px-3 text-sm font-semibold text-brand-ink transition hover:border-brand-sage"
             aria-label={`Cart with ${itemCount} item${itemCount === 1 ? "" : "s"}`}
           >
-            Bag
+            Cart
             {itemCount ? (
               <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-lime px-1 text-[11px] text-brand-ink">
                 {itemCount}

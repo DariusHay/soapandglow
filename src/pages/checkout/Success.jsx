@@ -4,6 +4,9 @@ import { useCart } from "../../context/useCart";
 
 export default function Success() {
   const { clearCart } = useCart();
+  const isPickup =
+    window.sessionStorage.getItem("soap-glow-checkout-fulfillment") ===
+    "pickup";
 
   return (
     <div className="bg-white">
@@ -24,6 +27,13 @@ export default function Success() {
             Square will send the payment receipt to the email used at checkout.
             Please keep that receipt for your records.
           </p>
+          {isPickup ? (
+            <div className="mt-5 rounded-2xl bg-brand-stone p-4 text-sm text-neutral-700">
+              This is a prearranged pickup order. The owner will call or text
+              within 24–48 hours to confirm pickup details. Please do not arrive
+              until your pickup has been confirmed.
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={clearCart}

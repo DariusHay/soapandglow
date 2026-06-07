@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { useCart } from "../context/useCart";
@@ -28,27 +29,65 @@ export default function Cart() {
     clearCart,
   } = useCart();
   const shipping = calculateShipping(subtotal);
+  const [fulfillmentMethod, setFulfillmentMethod] = useState("shipping");
+  const [pickupName, setPickupName] = useState("");
+  const [pickupPhone, setPickupPhone] = useState("");
+  const [pickupAcknowledged, setPickupAcknowledged] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const isPickup = fulfillmentMethod === "pickup";
 
   async function handleCheckout() {
     if (!items.length) return;
 
-    const response = await fetch(checkoutEndpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        items: items.map((item) => ({
-          slug: item.product.slug,
-          quantity: item.quantity,
-        })),
-      }),
-    });
-
-    const payload = await response.json();
-    if (!response.ok) {
-      throw new Error(payload.error || "Unable to start checkout.");
+    if (
+      isPickup &&
+      (!pickupName.trim() || !pickupPhone.trim() || !pickupAcknowledged)
+    ) {
+      setCheckoutError(
+        "Enter your name and phone number, then confirm the pickup notice."
+      );
+      return;
     }
 
-    window.location.href = payload.checkoutUrl;
+    setCheckoutError("");
+    setIsCheckingOut(true);
+
+    try {
+      const response = await fetch(checkoutEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            slug: item.product.slug,
+            quantity: item.quantity,
+          })),
+          fulfillmentMethod,
+          ...(isPickup
+            ? {
+                pickupContact: {
+                  name: pickupName.trim(),
+                  phone: pickupPhone.trim(),
+                },
+              }
+            : {}),
+        }),
+      });
+
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to start checkout.");
+      }
+
+      window.sessionStorage.setItem(
+        "soap-glow-checkout-fulfillment",
+        fulfillmentMethod
+      );
+      window.location.href = payload.checkoutUrl;
+    } catch (error) {
+      setCheckoutError(error.message);
+      setIsCheckingOut(false);
+    }
   }
 
   return (
@@ -62,7 +101,7 @@ export default function Cart() {
         <div className="max-w-6xl mx-auto">
           <p className="text-xs tracking-luxe uppercase text-brand-sage">Cart</p>
           <h1 className="font-display text-4xl sm:text-5xl text-brand-ink mt-2">
-            Your glow bag
+            Your cart
           </h1>
 
           {items.length ? (
@@ -128,6 +167,115 @@ export default function Cart() {
                   Order summary
                 </p>
 
+                <fieldset className="mt-5">
+                  <legend className="text-sm font-semibold text-brand-ink">
+                    Fulfillment
+                  </legend>
+                  <div className="mt-3 grid gap-3">
+                    <label className="flex cursor-pointer gap-3 rounded-2xl border border-neutral-200 p-4">
+                      <input
+                        type="radio"
+                        name="fulfillment"
+                        value="shipping"
+                        checked={!isPickup}
+                        onChange={() => setFulfillmentMethod("shipping")}
+                      />
+                      <span>
+                        <span className="block text-sm font-semibold text-brand-ink">
+                          Ship my order
+                        </span>
+                        <span className="mt-1 block text-xs text-neutral-600">
+                          Shipping address collected by Square.
+                        </span>
+                      </span>
+                    </label>
+
+                    <label className="flex cursor-pointer gap-3 rounded-2xl border border-neutral-200 p-4">
+                      <input
+                        type="radio"
+                        name="fulfillment"
+                        value="pickup"
+                        checked={isPickup}
+                        onChange={() => setFulfillmentMethod("pickup")}
+                      />
+                      <span>
+                        <span className="block text-sm font-semibold text-brand-ink">
+                          Prearranged local pickup
+                        </span>
+                        <span className="mt-1 block text-xs text-neutral-600">
+                          No shipping charge. Pickup must be coordinated directly
+                          with the owner.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                {isPickup ? (
+                  <div className="mt-4 rounded-2xl bg-brand-stone p-4">
+                    <p className="text-sm font-semibold text-brand-ink">
+                      Arrange your pickup
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-neutral-700">
+                      The owner will call or text you within 24–48 hours to
+                      confirm pickup details. Do not arrive until pickup has been
+                      confirmed.
+                    </p>
+                    <div className="mt-3 flex gap-3 text-sm">
+                      <a
+                        href="sms:+13219393483"
+                        className="underline underline-offset-4"
+                      >
+                        Text owner
+                      </a>
+                      <a
+                        href="tel:+13219393483"
+                        className="underline underline-offset-4"
+                      >
+                        Call owner
+                      </a>
+                    </div>
+                    <div className="mt-4 grid gap-3">
+                      <label className="text-xs font-medium text-brand-ink">
+                        Pickup name
+                        <input
+                          type="text"
+                          value={pickupName}
+                          onChange={(event) => setPickupName(event.target.value)}
+                          autoComplete="name"
+                          maxLength="255"
+                          className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
+                        />
+                      </label>
+                      <label className="text-xs font-medium text-brand-ink">
+                        Mobile phone
+                        <input
+                          type="tel"
+                          value={pickupPhone}
+                          onChange={(event) => setPickupPhone(event.target.value)}
+                          autoComplete="tel"
+                          maxLength="24"
+                          className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
+                        />
+                      </label>
+                      <label className="flex gap-2 text-xs leading-relaxed text-neutral-700">
+                        <input
+                          type="checkbox"
+                          checked={pickupAcknowledged}
+                          onChange={(event) =>
+                            setPickupAcknowledged(event.target.checked)
+                          }
+                          className="mt-1"
+                        />
+                        <span>
+                          I understand pickup is not confirmed until the owner
+                          contacts me within 24–48 hours.
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                ) : null}
+
                 <div className="mt-5 space-y-3 text-sm text-neutral-700">
                   <div className="flex justify-between">
                     <span>{itemCount} item{itemCount === 1 ? "" : "s"}</span>
@@ -140,8 +288,8 @@ export default function Cart() {
                     </div>
                   ) : null}
                   <div className="flex justify-between">
-                    <span>Standard shipping</span>
-                    <span>{formatPrice(shipping)}</span>
+                    <span>{isPickup ? "Local pickup" : "Standard shipping"}</span>
+                    <span>{isPickup ? "Free" : formatPrice(shipping)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Sales tax</span>
@@ -152,16 +300,23 @@ export default function Cart() {
                 <div className="mt-5 border-t border-neutral-200 pt-5">
                   <div className="flex items-center justify-between text-lg font-semibold text-brand-ink">
                     <span>Before tax</span>
-                    <span>{formatPrice(subtotal + shipping)}</span>
+                    <span>{formatPrice(subtotal + (isPickup ? 0 : shipping))}</span>
                   </div>
                 </div>
+
+                {checkoutError ? (
+                  <p className="mt-4 text-sm text-red-700" role="alert">
+                    {checkoutError}
+                  </p>
+                ) : null}
 
                 <button
                   type="button"
                   onClick={handleCheckout}
+                  disabled={isCheckingOut}
                   className="mt-6 w-full rounded-full bg-brand-lime px-6 py-3 font-semibold text-brand-ink transition hover:opacity-90"
                 >
-                  Checkout with Square
+                  {isCheckingOut ? "Opening Square..." : "Checkout with Square"}
                 </button>
 
                 <button

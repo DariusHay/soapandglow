@@ -29,6 +29,15 @@ export default function ShippingPolicy() {
       <h3>International shipping</h3>
       <p>We currently ship within the United States only.</p>
 
+      <h3>Prearranged local pickup</h3>
+      <p>
+        Local pickup is available by direct arrangement with the owner. Select
+        prearranged local pickup in your cart and provide a mobile number. No
+        shipping fee will be charged. The owner will call or text within 24–48
+        hours to confirm pickup details. Please do not arrive until your pickup
+        has been confirmed.
+      </p>
+
       <h3>Lost or damaged packages</h3>
       <p>
         Contact us at <a href="mailto:soapglowandbeautybar@gmail.com">soapglowandbeautybar@gmail.com</a> or <a href="tel:3219393483">321-939-3483</a> within 7 days of delivery.

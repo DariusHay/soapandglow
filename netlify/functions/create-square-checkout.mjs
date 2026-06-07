@@ -22,6 +22,20 @@ function requiredEnv(name) {
   return value;
 }
 
+function normalizePhone(phone = "") {
+  const digits = String(phone).replace(/\D/g, "");
+  const normalized =
+    digits.length === 10 ? `+1${digits}` : digits.length === 11 && digits[0] === "1"
+      ? `+${digits}`
+      : "";
+
+  if (!normalized) {
+    throw new Error("Enter a valid US phone number for pickup.");
+  }
+
+  return normalized;
+}
+
 function normalizeItems(items = []) {
   return items.map((item) => {
     const product = findProduct(item.slug);
@@ -61,6 +75,12 @@ function calculateShippingCents(subtotalCents) {
   return 1600;
 }
 
+function getPickupAt() {
+  const pickupAt = new Date();
+  pickupAt.setHours(pickupAt.getHours() + 48);
+  return pickupAt.toISOString();
+}
+
 export async function handler(event) {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders };
@@ -81,9 +101,23 @@ export async function handler(event) {
 
     const parsed = JSON.parse(event.body || "{}");
     const lineItems = normalizeItems(parsed.items);
+    const fulfillmentMethod =
+      parsed.fulfillmentMethod === "pickup" ? "pickup" : "shipping";
+    const isPickup = fulfillmentMethod === "pickup";
 
     if (!lineItems.length) {
       return json(400, { error: "Cart is empty." });
+    }
+
+    const pickupName = isPickup
+      ? String(parsed.pickupContact?.name || "").trim()
+      : "";
+    const pickupPhone = isPickup
+      ? normalizePhone(parsed.pickupContact?.phone)
+      : "";
+
+    if (isPickup && !pickupName) {
+      return json(400, { error: "Pickup name is required." });
     }
 
     const bundleSavingsCents = calculateBundleSavingsCents(lineItems);
@@ -106,6 +140,25 @@ export async function handler(event) {
         order: {
           location_id: locationId,
           line_items: lineItems.map(({ collection, ...item }) => item),
+          ...(isPickup
+            ? {
+                fulfillments: [
+                  {
+                    type: "PICKUP",
+                    state: "PROPOSED",
+                    pickup_details: {
+                      schedule_type: "SCHEDULED",
+                      pickup_at: getPickupAt(),
+                      recipient: {
+                        display_name: pickupName.slice(0, 255),
+                        phone_number: pickupPhone,
+                      },
+                      note: "Contact customer within 24-48 hours to arrange pickup.",
+                    },
+                  },
+                ],
+              }
+            : {}),
           ...(bundleSavingsCents
             ? {
                 discounts: [
@@ -131,15 +184,19 @@ export async function handler(event) {
             "soapglowandbeautybar@gmail.com",
           enable_coupon: false,
           enable_loyalty: false,
-          shipping_fee: {
-            name: "Standard shipping",
-            charge: {
-              amount: shippingCents,
-              currency: "USD",
-            },
-          },
+          ...(!isPickup
+            ? {
+                shipping_fee: {
+                  name: "Standard shipping",
+                  charge: {
+                    amount: shippingCents,
+                    currency: "USD",
+                  },
+                },
+              }
+            : {}),
           ask_for_shipping_address:
-            process.env.SQUARE_ASK_FOR_SHIPPING !== "false",
+            !isPickup && process.env.SQUARE_ASK_FOR_SHIPPING !== "false",
         },
       }),
     });
@@ -148,7 +205,9 @@ export async function handler(event) {
 
     if (!response.ok) {
       return json(response.status, {
-        error: "Square checkout could not be created.",
+        error:
+          payload.errors?.[0]?.detail ||
+          "Square checkout could not be created.",
         details: payload,
       });
     }
