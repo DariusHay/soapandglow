@@ -78,6 +78,15 @@ async function findSoapGlowPlace(apiKey) {
         body: JSON.stringify({
           textQuery,
           maxResultCount: 10,
+          locationBias: {
+            circle: {
+              center: {
+                latitude: 28.54642075,
+                longitude: -81.2843008,
+              },
+              radius: 5000,
+            },
+          },
         }),
       }
     );
