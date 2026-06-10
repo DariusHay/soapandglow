@@ -78,6 +78,7 @@ async function findSoapGlowPlace(apiKey) {
         body: JSON.stringify({
           textQuery,
           maxResultCount: 10,
+          includePureServiceAreaBusinesses: true,
           locationBias: {
             circle: {
               center: {
