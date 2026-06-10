@@ -6,6 +6,14 @@ const reviewsEndpoint =
   import.meta.env.VITE_GOOGLE_REVIEWS_ENDPOINT ||
   "/.netlify/functions/google-reviews";
 
+function isSoapGlowBusiness(name = "") {
+  const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return (
+    normalizedName.includes("soapglow") &&
+    normalizedName.includes("beautybar")
+  );
+}
+
 function StarRating({ rating = 5 }) {
   return (
     <div
@@ -34,13 +42,21 @@ export default function Testimonials() {
 
     async function loadReviews() {
       try {
-        const response = await fetch(reviewsEndpoint, {
+        const separator = reviewsEndpoint.includes("?") ? "&" : "?";
+        const response = await fetch(`${reviewsEndpoint}${separator}v=2`, {
           signal: controller.signal,
+          cache: "no-store",
         });
         const payload = await response.json();
 
         if (!response.ok) {
           throw new Error(payload.error || "Google reviews could not be loaded.");
+        }
+
+        if (!isSoapGlowBusiness(payload.name)) {
+          throw new Error(
+            "Google reviews are temporarily unavailable for this business."
+          );
         }
 
         setGoogleData(payload);
