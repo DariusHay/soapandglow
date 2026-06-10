@@ -29,6 +29,46 @@ async function googleRequest(url, options = {}) {
   return payload;
 }
 
+function normalizeBusinessName(name = "") {
+  return name.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function isSoapGlowBusiness(place) {
+  const name = normalizeBusinessName(place.displayName?.text);
+  return name.includes("soapglow") && name.includes("beautybar");
+}
+
+async function findSoapGlowPlace(apiKey) {
+  const queries = [
+    "SoapGlowandBeautyBar",
+    "Soap Glow & Beauty Bar",
+    "Soap Glow and Beauty Bar Orlando Florida",
+  ];
+
+  for (const textQuery of queries) {
+    const payload = await googleRequest(
+      "https://places.googleapis.com/v1/places:searchText",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "places.id,places.displayName",
+        },
+        body: JSON.stringify({
+          textQuery,
+          maxResultCount: 10,
+        }),
+      }
+    );
+
+    const match = payload.places?.find(isSoapGlowBusiness);
+    if (match) return match;
+  }
+
+  return null;
+}
+
 export async function handler(event) {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders };
@@ -49,23 +89,8 @@ export async function handler(event) {
     let placeId = configuredPlaceId;
 
     if (!placeId) {
-      const searchPayload = await googleRequest(
-        "https://places.googleapis.com/v1/places:searchText",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Goog-Api-Key": apiKey,
-            "X-Goog-FieldMask": "places.id",
-          },
-          body: JSON.stringify({
-            textQuery: "Soap Glow and Beauty Bar Orlando Florida",
-            maxResultCount: 1,
-          }),
-        }
-      );
-
-      placeId = searchPayload.places?.[0]?.id;
+      const place = await findSoapGlowPlace(apiKey);
+      placeId = place?.id;
     }
 
     if (!placeId) {
@@ -89,6 +114,13 @@ export async function handler(event) {
         },
       }
     );
+
+    if (!isSoapGlowBusiness(place)) {
+      return json(409, {
+        error:
+          "The configured Google listing does not match Soap Glow & Beauty Bar.",
+      });
+    }
 
     const reviews = (place.reviews || []).map((review) => ({
       name: review.authorAttribution?.displayName || "Google reviewer",
