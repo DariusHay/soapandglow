@@ -1,14 +1,34 @@
-const corsHeaders = {
-  "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN || "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-};
+const defaultAllowedOrigins = [
+  "https://celebrated-biscotti-e21497.netlify.app",
+  "https://soapglowandbeautybar.com",
+  "https://www.soapglowandbeautybar.com",
+];
 
-function json(statusCode, body, extraHeaders = {}) {
+function getCorsHeaders(origin = "") {
+  const configuredOrigins = (process.env.ALLOWED_ORIGIN || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const allowedOrigins = new Set([
+    ...defaultAllowedOrigins,
+    ...configuredOrigins,
+  ]);
+
+  return {
+    "Access-Control-Allow-Origin": allowedOrigins.has(origin)
+      ? origin
+      : defaultAllowedOrigins[0],
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    Vary: "Origin",
+  };
+}
+
+function json(statusCode, body, extraHeaders = {}, origin = "") {
   return {
     statusCode,
     headers: {
-      ...corsHeaders,
+      ...getCorsHeaders(origin),
       "Content-Type": "application/json",
       ...extraHeaders,
     },
@@ -70,19 +90,26 @@ async function findSoapGlowPlace(apiKey) {
 }
 
 export async function handler(event) {
+  const origin = event.headers?.origin || "";
+
   if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers: corsHeaders };
+    return { statusCode: 204, headers: getCorsHeaders(origin) };
   }
 
   if (event.httpMethod !== "GET") {
-    return json(405, { error: "Method not allowed" });
+    return json(405, { error: "Method not allowed" }, {}, origin);
   }
 
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const configuredPlaceId = process.env.GOOGLE_PLACE_ID;
 
   if (!apiKey) {
-    return json(503, { error: "Google reviews are not configured yet." });
+    return json(
+      503,
+      { error: "Google reviews are not configured yet." },
+      {},
+      origin
+    );
   }
 
   try {
@@ -94,7 +121,12 @@ export async function handler(event) {
     }
 
     if (!placeId) {
-      return json(404, { error: "Google Business Profile was not found." });
+      return json(
+        404,
+        { error: "Google Business Profile was not found." },
+        {},
+        origin
+      );
     }
 
     const fields = [
@@ -116,10 +148,15 @@ export async function handler(event) {
     );
 
     if (!isSoapGlowBusiness(place)) {
-      return json(409, {
-        error:
-          "The configured Google listing does not match Soap Glow & Beauty Bar.",
-      });
+      return json(
+        409,
+        {
+          error:
+            "The configured Google listing does not match Soap Glow & Beauty Bar.",
+        },
+        {},
+        origin
+      );
     }
 
     const reviews = (place.reviews || []).map((review) => ({
@@ -141,12 +178,18 @@ export async function handler(event) {
         googleMapsUrl: place.googleMapsUri || "",
         reviews,
       },
-      { "Cache-Control": "public, max-age=3600, s-maxage=21600" }
+      { "Cache-Control": "public, max-age=3600, s-maxage=21600" },
+      origin
     );
   } catch (error) {
     console.error("Google reviews error:", error);
-    return json(502, {
-      error: error.message || "Google reviews could not be loaded.",
-    });
+    return json(
+      502,
+      {
+        error: error.message || "Google reviews could not be loaded.",
+      },
+      {},
+      origin
+    );
   }
 }

@@ -2,16 +2,39 @@ import crypto from "node:crypto";
 import { findProduct } from "../shared/product-catalog.mjs";
 import { calculateBundleSavingsCents } from "../../shared/bundle-pricing.mjs";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN || "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+const defaultAllowedOrigins = [
+  "https://celebrated-biscotti-e21497.netlify.app",
+  "https://soapglowandbeautybar.com",
+  "https://www.soapglowandbeautybar.com",
+];
 
-function json(statusCode, body) {
+function getCorsHeaders(origin = "") {
+  const configuredOrigins = (process.env.ALLOWED_ORIGIN || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const allowedOrigins = new Set([
+    ...defaultAllowedOrigins,
+    ...configuredOrigins,
+  ]);
+
+  return {
+    "Access-Control-Allow-Origin": allowedOrigins.has(origin)
+      ? origin
+      : defaultAllowedOrigins[0],
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    Vary: "Origin",
+  };
+}
+
+function json(statusCode, body, origin) {
   return {
     statusCode,
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    headers: {
+      ...getCorsHeaders(origin),
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(body),
   };
 }
@@ -82,12 +105,14 @@ function getPickupAt() {
 }
 
 export async function handler(event) {
+  const origin = event.headers?.origin || "";
+
   if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers: corsHeaders };
+    return { statusCode: 204, headers: getCorsHeaders(origin) };
   }
 
   if (event.httpMethod !== "POST") {
-    return json(405, { error: "Method not allowed" });
+    return json(405, { error: "Method not allowed" }, origin);
   }
 
   try {
@@ -106,7 +131,7 @@ export async function handler(event) {
     const isPickup = fulfillmentMethod === "pickup";
 
     if (!lineItems.length) {
-      return json(400, { error: "Cart is empty." });
+      return json(400, { error: "Cart is empty." }, origin);
     }
 
     const pickupName = isPickup
@@ -117,7 +142,7 @@ export async function handler(event) {
       : "";
 
     if (isPickup && !pickupName) {
-      return json(400, { error: "Pickup name is required." });
+      return json(400, { error: "Pickup name is required." }, origin);
     }
 
     const bundleSavingsCents = calculateBundleSavingsCents(lineItems);
@@ -209,14 +234,14 @@ export async function handler(event) {
           payload.errors?.[0]?.detail ||
           "Square checkout could not be created.",
         details: payload,
-      });
+      }, origin);
     }
 
     return json(200, {
       checkoutUrl: payload.payment_link?.url,
       orderId: payload.payment_link?.order_id,
-    });
+    }, origin);
   } catch (error) {
-    return json(500, { error: error.message || "Checkout failed." });
+    return json(500, { error: error.message || "Checkout failed." }, origin);
   }
 }

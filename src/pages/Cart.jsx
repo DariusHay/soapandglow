@@ -6,7 +6,9 @@ import { formatPrice } from "../utils/formatPrice";
 
 const checkoutEndpoint =
   import.meta.env.VITE_SQUARE_CHECKOUT_ENDPOINT ||
-  "/.netlify/functions/create-square-checkout";
+  (window.location.hostname.endsWith("netlify.app")
+    ? "/.netlify/functions/create-square-checkout"
+    : "https://celebrated-biscotti-e21497.netlify.app/.netlify/functions/create-square-checkout");
 
 function calculateShipping(subtotal) {
   if (subtotal <= 25) return 6;

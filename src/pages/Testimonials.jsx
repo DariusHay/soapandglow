@@ -4,7 +4,9 @@ import { googleReviewsUrl } from "../utils/orderLinks";
 
 const reviewsEndpoint =
   import.meta.env.VITE_GOOGLE_REVIEWS_ENDPOINT ||
-  "/.netlify/functions/google-reviews";
+  (window.location.hostname.endsWith("netlify.app")
+    ? "/.netlify/functions/google-reviews"
+    : "https://celebrated-biscotti-e21497.netlify.app/.netlify/functions/google-reviews");
 
 function isSoapGlowBusiness(name = "") {
   const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, "");
