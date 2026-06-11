@@ -28,7 +28,12 @@ const bundleOffers = [
 ];
 
 export default function Home() {
-  const featured = products.filter((p) => p.featured).slice(0, 6);
+  const featured = products
+    .filter((product) => product.featured)
+    .slice(0, 6)
+    .sort((a, b) =>
+      a.name.localeCompare(b.name, "en", { sensitivity: "base" })
+    );
 
   return (
     <div className="bg-white">

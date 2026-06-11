@@ -27,6 +27,8 @@ const bayberryCitrusImage = import.meta.env.BASE_URL + 'images/bayberry-citrus.p
 const cottonFieldsImage = import.meta.env.BASE_URL + 'images/cotton-fields.png';
 const moroccanVanillaGoatMilkImage = import.meta.env.BASE_URL + 'images/moroccan-vanilla-goat-milk.png';
 const milkCollagenImage = import.meta.env.BASE_URL + 'images/milk-collagen.png';
+const teaTreeMintImage = import.meta.env.BASE_URL + 'images/Tea-Tree-Mint.png';
+const desertSageImage = import.meta.env.BASE_URL + 'images/Desert-Sage.png';
 
 export const products = [
   {
@@ -550,5 +552,41 @@ export const products = [
       "Promotes a plumper look",
     ],
     image: milkCollagenImage,
+  },
+  {
+    id: "tea-tree-mint",
+    slug: "tea-tree-mint",
+    name: "Tea Tree Mint",
+    collection: "Classic Collection",
+    category: "Classic Collection",
+    price: 10,
+    featured: false,
+    shortDescription: "Cooling, clarifying, invigorating.",
+    description:
+      "Tea tree and mint create a crisp, refreshing cleanse that leaves skin feeling balanced and renewed.",
+    benefits: [
+      "Refreshes and cleanses",
+      "Helps remove excess oil and buildup",
+      "Leaves skin feeling cool and revived",
+    ],
+    image: teaTreeMintImage,
+  },
+  {
+    id: "desert-sage",
+    slug: "desert-sage",
+    name: "Desert Sage",
+    collection: "Classic Collection",
+    category: "Classic Collection",
+    price: 10,
+    featured: false,
+    shortDescription: "Earthy, calming, gently cleansing.",
+    description:
+      "An earthy sage-inspired bar that gently cleanses while creating a warm, grounding self-care ritual.",
+    benefits: [
+      "Gently cleanses without a heavy feel",
+      "Leaves skin feeling soft and refreshed",
+      "Creates a calming, grounded experience",
+    ],
+    image: desertSageImage,
   },
 ];

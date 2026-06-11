@@ -28,6 +28,8 @@ export const productCatalog = [
   { slug: "cotton-fields", name: "Cotton Fields", priceCents: 1000 },
   { slug: "moroccan-vanilla-goat-milk", name: "Moroccan Vanilla Goat Milk", priceCents: 1200 },
   { slug: "milk-collagen", name: "Milk & Collagen", priceCents: 1200 },
+  { slug: "tea-tree-mint", name: "Tea Tree Mint", priceCents: 1000, collection: "Classic Collection" },
+  { slug: "desert-sage", name: "Desert Sage", priceCents: 1000, collection: "Classic Collection" },
 ];
 
 export function findProduct(slug) {

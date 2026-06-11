@@ -9,8 +9,14 @@ export default function Shop() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filtered = useMemo(() => {
-    if (activeCategory === "All") return products;
-    return products.filter((p) => p.category === activeCategory);
+    const matchingProducts =
+      activeCategory === "All"
+        ? products
+        : products.filter((product) => product.category === activeCategory);
+
+    return [...matchingProducts].sort((a, b) =>
+      a.name.localeCompare(b.name, "en", { sensitivity: "base" })
+    );
   }, [activeCategory]);
 
   return (
