@@ -21,7 +21,11 @@ function verifySquareSignature(event) {
   );
 }
 
-async function sendNotification({ subject, html }) {
+function formatMoney(money) {
+  return money?.amount ? `$${(money.amount / 100).toFixed(2)}` : "Unknown amount";
+}
+
+async function sendEmailNotification({ subject, html }) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.ORDER_NOTIFICATION_EMAIL;
   const from = process.env.ORDER_NOTIFICATION_FROM || "orders@example.com";
@@ -31,7 +35,7 @@ async function sendNotification({ subject, html }) {
     return;
   }
 
-  await fetch("https://api.resend.com/emails", {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -39,6 +43,52 @@ async function sendNotification({ subject, html }) {
     },
     body: JSON.stringify({ from, to, subject, html }),
   });
+
+  if (!response.ok) {
+    const message = await response.text();
+    console.error("Order email notification failed.", message);
+  }
+}
+
+async function sendTextNotification({ body }) {
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const to = process.env.ORDER_NOTIFICATION_PHONE;
+  const from = process.env.TWILIO_FROM_NUMBER;
+  const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
+
+  if (!accountSid || !authToken || !to || (!from && !messagingServiceSid)) {
+    console.log("Order text notification skipped. Twilio environment variables are missing.");
+    return;
+  }
+
+  const params = new URLSearchParams({
+    To: to,
+    Body: body,
+  });
+
+  if (messagingServiceSid) {
+    params.set("MessagingServiceSid", messagingServiceSid);
+  } else {
+    params.set("From", from);
+  }
+
+  const response = await fetch(
+    `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
+    }
+  );
+
+  if (!response.ok) {
+    const message = await response.text();
+    console.error("Order text notification failed.", message);
+  }
 }
 
 export async function handler(event) {
@@ -55,19 +105,23 @@ export async function handler(event) {
   const payment = payload.data?.object?.payment;
 
   if (type === "payment.updated" && payment?.status === "COMPLETED") {
-    const amount = payment.amount_money?.amount
-      ? `$${(payment.amount_money.amount / 100).toFixed(2)}`
-      : "Unknown amount";
+    const amount = formatMoney(payment.amount_money);
+    const orderId = payment.order_id || "Not provided";
+    const paymentId = payment.id || "Not provided";
 
-    await sendNotification({
+    await sendEmailNotification({
       subject: "New Soap Glow order paid",
       html: `
         <h1>New paid order</h1>
         <p><strong>Amount:</strong> ${amount}</p>
-        <p><strong>Payment ID:</strong> ${payment.id}</p>
-        <p><strong>Order ID:</strong> ${payment.order_id || "Not provided"}</p>
+        <p><strong>Payment ID:</strong> ${paymentId}</p>
+        <p><strong>Order ID:</strong> ${orderId}</p>
         <p>Open Square Dashboard for the full customer, shipping, and fulfillment details.</p>
       `,
+    });
+
+    await sendTextNotification({
+      body: `New Soap Glow order paid: ${amount}. Order ID: ${orderId}. Open Square Dashboard for customer and fulfillment details.`,
     });
   }
 
