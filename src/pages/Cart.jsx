@@ -9,6 +9,7 @@ const checkoutEndpoint =
   (window.location.hostname.endsWith("netlify.app")
     ? "/.netlify/functions/create-square-checkout"
     : "https://celebrated-biscotti-e21497.netlify.app/.netlify/functions/create-square-checkout");
+const pendingOrderKey = "soap-glow-pending-order";
 
 function calculateShipping(subtotal) {
   if (subtotal <= 25) return 6;
@@ -32,8 +33,9 @@ export default function Cart() {
   } = useCart();
   const shipping = calculateShipping(subtotal);
   const [fulfillmentMethod, setFulfillmentMethod] = useState("shipping");
-  const [pickupName, setPickupName] = useState("");
-  const [pickupPhone, setPickupPhone] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
   const [pickupAcknowledged, setPickupAcknowledged] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -42,13 +44,17 @@ export default function Cart() {
   async function handleCheckout() {
     if (!items.length) return;
 
-    if (
-      isPickup &&
-      (!pickupName.trim() || !pickupPhone.trim() || !pickupAcknowledged)
-    ) {
-      setCheckoutError(
-        "Enter your name and phone number, then confirm the pickup notice."
-      );
+    const trimmedCustomerName = customerName.trim();
+    const trimmedCustomerEmail = customerEmail.trim();
+    const trimmedCustomerPhone = customerPhone.trim();
+
+    if (!trimmedCustomerName || !trimmedCustomerEmail || !trimmedCustomerPhone) {
+      setCheckoutError("Enter your name, email, and phone number before checkout.");
+      return;
+    }
+
+    if (isPickup && !pickupAcknowledged) {
+      setCheckoutError("Confirm the pickup notice before checkout.");
       return;
     }
 
@@ -68,8 +74,8 @@ export default function Cart() {
           ...(isPickup
             ? {
                 pickupContact: {
-                  name: pickupName.trim(),
-                  phone: pickupPhone.trim(),
+                  name: trimmedCustomerName,
+                  phone: trimmedCustomerPhone,
                 },
               }
             : {}),
@@ -84,6 +90,30 @@ export default function Cart() {
       window.sessionStorage.setItem(
         "soap-glow-checkout-fulfillment",
         fulfillmentMethod
+      );
+      window.sessionStorage.setItem(
+        pendingOrderKey,
+        JSON.stringify({
+          orderId: payload.orderId || "Pending Square order",
+          fulfillmentMethod,
+          customerName: trimmedCustomerName,
+          customerEmail: trimmedCustomerEmail,
+          customerPhone: trimmedCustomerPhone,
+          items: items.map((item) => ({
+            name: item.product.name,
+            slug: item.product.slug,
+            price: item.product.price,
+            quantity: item.quantity,
+            lineTotal: item.lineTotal,
+          })),
+          itemCount,
+          merchandiseSubtotal,
+          bundleSavings,
+          shipping: isPickup ? 0 : shipping,
+          subtotal,
+          estimatedTotalBeforeTax: subtotal + (isPickup ? 0 : shipping),
+          createdAt: new Date().toISOString(),
+        })
       );
       window.location.href = payload.checkoutUrl;
     } catch (error) {
@@ -169,6 +199,50 @@ export default function Cart() {
                   Order summary
                 </p>
 
+                <div className="mt-5 rounded-2xl border border-neutral-200 p-4">
+                  <p className="text-sm font-semibold text-brand-ink">
+                    Order contact
+                  </p>
+                  <p className="mt-1 text-xs text-neutral-600">
+                    This helps the owner identify and follow up on your order.
+                  </p>
+                  <div className="mt-4 grid gap-3">
+                    <label className="text-xs font-medium text-brand-ink">
+                      Name
+                      <input
+                        type="text"
+                        value={customerName}
+                        onChange={(event) => setCustomerName(event.target.value)}
+                        autoComplete="name"
+                        maxLength="255"
+                        className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
+                      />
+                    </label>
+                    <label className="text-xs font-medium text-brand-ink">
+                      Email
+                      <input
+                        type="email"
+                        value={customerEmail}
+                        onChange={(event) => setCustomerEmail(event.target.value)}
+                        autoComplete="email"
+                        maxLength="255"
+                        className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
+                      />
+                    </label>
+                    <label className="text-xs font-medium text-brand-ink">
+                      Mobile phone
+                      <input
+                        type="tel"
+                        value={customerPhone}
+                        onChange={(event) => setCustomerPhone(event.target.value)}
+                        autoComplete="tel"
+                        maxLength="24"
+                        className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
+                      />
+                    </label>
+                  </div>
+                </div>
+
                 <fieldset className="mt-5">
                   <legend className="text-sm font-semibold text-brand-ink">
                     Fulfillment
@@ -238,28 +312,6 @@ export default function Cart() {
                       </a>
                     </div>
                     <div className="mt-4 grid gap-3">
-                      <label className="text-xs font-medium text-brand-ink">
-                        Pickup name
-                        <input
-                          type="text"
-                          value={pickupName}
-                          onChange={(event) => setPickupName(event.target.value)}
-                          autoComplete="name"
-                          maxLength="255"
-                          className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
-                        />
-                      </label>
-                      <label className="text-xs font-medium text-brand-ink">
-                        Mobile phone
-                        <input
-                          type="tel"
-                          value={pickupPhone}
-                          onChange={(event) => setPickupPhone(event.target.value)}
-                          autoComplete="tel"
-                          maxLength="24"
-                          className="mt-1 h-11 w-full rounded-xl border border-neutral-300 bg-white px-3 text-sm"
-                        />
-                      </label>
                       <label className="flex gap-2 text-xs leading-relaxed text-neutral-700">
                         <input
                           type="checkbox"
